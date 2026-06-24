@@ -1,0 +1,1165 @@
+/* ============================
+   DzharFinance Dashboard Finance
+   Matching Reminder/Jadwal: dark topbar, static finance-themed background,
+   white cards, blue (#078cd4), green (#05c227), yellow (#f7b801)
+============================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  --dark: #0d0d0d;
+  --topbar: #111;
+  --white: #ffffff;
+  --soft: #f8f9fa;
+  --text: #273442;
+  --muted: #667085;
+  --blue: #078cd4;
+  --green: #05c227;
+  --yellow: #f7b801;
+  --red: #e74c3c;
+  --border: #e4e9f0;
+  --card-shadow: 0 14px 35px rgba(0, 0, 0, 0.18);
+  --soft-shadow: 0 7px 18px rgba(0, 0, 0, 0.10);
+}
+
+html { min-width: 320px; }
+body {
+  min-height: 100vh;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  background: var(--dark);
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+}
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+img { max-width: 100%; display: block; }
+
+/* Background statis tema keuangan */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(7, 140, 212, 0.36), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(5, 194, 39, 0.20), transparent 28%),
+    radial-gradient(circle at 50% 92%, rgba(247, 184, 1, 0.12), transparent 32%),
+    linear-gradient(135deg, #07111f 0%, #0d0d0d 48%, #102033 100%);
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(0,0,0,.22), rgba(0,0,0,.55)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='760' viewBox='0 0 1000 760'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.105)' stroke-width='3'%3E%3Crect x='105' y='475' width='230' height='155' rx='24'/%3E%3Cpath d='M140 530h160M140 570h105M140 610h135' stroke-linecap='round'/%3E%3Ccircle cx='780' cy='175' r='105'/%3E%3Cpath d='M780 110v65l50 30' stroke-linecap='round'/%3E%3Cpath d='M650 520c52-72 127-72 180 0'/%3E%3Cpath d='M700 520v-90h80v90'/%3E%3C/g%3E%3Cg fill='rgba(255,255,255,0.09)'%3E%3Ctext x='735' y='196' font-family='Arial' font-size='76' font-weight='700'%3E%24%3C/text%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: min(1000px, 125vw) auto;
+}
+
+.hidden { display: none !important; }
+
+/* ============================
+   TOPBAR
+============================ */
+.dashboard-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 32px;
+  background: rgba(17, 17, 17, 0.92);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 18px rgba(0,0,0,.25);
+}
+.logo { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.dashboard-topbar a, .back-btn {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  transition: transform 0.25s ease, background 0.25s ease;
+  flex: 0 0 auto;
+}
+.dashboard-topbar a:hover, .back-btn:hover {
+  transform: translateX(-3px) scale(1.05);
+  background: rgba(255,255,255,.09);
+}
+.dashboard-topbar a img, .back-btn img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+.dashboard-logo { height: 48px; width: auto; object-fit: contain; }
+.topbar-badge {
+  padding: 8px 13px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  color: #e8f7ff;
+  font-size: .85rem;
+  font-weight: 700;
+  border: 1px solid rgba(255,255,255,.12);
+  white-space: nowrap;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  padding: 38px 20px 0;
+}
+
+/* ============================
+   HERO
+============================ */
+.finance-hero {
+  color: white;
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 28px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 14px;
+  margin-bottom: 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.12);
+  color: #e8f7ff;
+  border: 1px solid rgba(255,255,255,.16);
+  font-size: .85rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+h1 {
+  font-size: clamp(2.1rem, 6vw, 4.2rem);
+  line-height: 1.08;
+  font-weight: 700;
+  text-shadow: 0 4px 18px rgba(0,0,0,.45);
+  margin-bottom: 10px;
+}
+.finance-hero p {
+  color: #d6d6d6;
+  font-size: clamp(.95rem, 2.4vw, 1.08rem);
+  line-height: 1.7;
+}
+
+/* ============================
+   CARDS
+============================ */
+.card {
+  background: rgba(255,255,255,0.96);
+  border-radius: 18px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255,255,255,.55);
+  padding: 22px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 42px rgba(0,0,0,.24);
+}
+.card-label {
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 5px;
+}
+.section-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.section-title-row h3, .card h3 { color: #111; font-size: 1.15rem; }
+.limit-badge {
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  background: #eef8ff;
+  border: 1px solid #d7eefb;
+  color: var(--blue);
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 700;
+}
+.identity {
+  width: min(640px, calc(100% - 32px));
+  margin: 0 auto 24px;
+}
+.card-view {
+  display: grid;
+  gap: 14px;
+}
+.card-view p { color: var(--muted); line-height: 1.6; }
+#card-number { color: #111; font-weight: 700; }
+.card-form {
+  display: grid;
+  gap: 10px;
+}
+label {
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--text);
+}
+input, select {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 12px;
+  border-radius: 12px;
+  border: 1px solid #d0d7de;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  transition: border .2s ease, box-shadow .2s ease;
+}
+input:focus, select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(7,140,212,.16);
+}
+button, #edit-card, #save-card, #submit-transaksi {
+  border: none;
+  background: linear-gradient(135deg, var(--blue), var(--green));
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(7, 140, 212, .22);
+  transition: filter .25s ease, transform .2s ease, box-shadow .2s ease;
+}
+button:hover, #edit-card:hover, #save-card:hover, #submit-transaksi:hover {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(5, 194, 39, .24);
+}
+#edit-card, #save-card, #submit-transaksi { padding: 11px 18px; }
+
+/* ============================
+   SUMMARY
+============================ */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  width: min(1050px, calc(100% - 32px));
+  margin: 0 auto 24px;
+}
+.summary-card {
+  position: relative;
+  overflow: hidden;
+}
+.summary-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 6px;
+}
+.income-card::before { background: linear-gradient(90deg, var(--green), #7ee787); }
+.expense-card::before { background: linear-gradient(90deg, var(--red), #ff8a65); }
+.balance-card::before { background: linear-gradient(90deg, var(--blue), var(--green)); }
+.money-value {
+  margin: 8px 0 4px;
+  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+  font-weight: 700;
+  color: #111;
+  overflow-wrap: anywhere;
+}
+.summary small { color: var(--muted); }
+
+/* ============================
+   CHART + FORM
+============================ */
+.transaksi-grafik {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(290px, .75fr);
+  align-items: start;
+  gap: 20px;
+  width: min(1050px, calc(100% - 32px));
+  margin: 0 auto;
+}
+.chart-box {
+  min-height: 315px;
+  position: relative;
+}
+#financeChart { width: 100% !important; max-height: 330px; }
+.form-transaksi {
+  display: grid;
+  gap: 11px;
+}
+.form-transaksi h3 { margin-bottom: 2px; }
+.form-transaksi button { margin-top: 4px; }
+
+/* ============================
+   TOAST + MODAL
+============================ */
+.toast-container {
+  position: fixed;
+  top: 84px;
+  right: 24px;
+  z-index: 9999;
+  display: grid;
+  gap: 10px;
+  width: min(340px, calc(100% - 32px));
+}
+.toast {
+  background: rgba(255,255,255,.98);
+  color: var(--text);
+  border-left: 5px solid var(--blue);
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.22);
+  animation: toastIn .28s ease both;
+  line-height: 1.55;
+}
+.toast.success { border-left-color: var(--green); }
+.toast.warning { border-left-color: var(--yellow); }
+.toast.danger { border-left-color: var(--red); }
+.toast strong { display: block; color: #111; margin-bottom: 2px; }
+@keyframes toastIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,.62);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.modal-box {
+  width: min(390px, 100%);
+  background: white;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 18px 45px rgba(0,0,0,.35);
+  animation: modalIn .25s ease both;
+}
+.modal-box h4 { font-size: 1.15rem; margin-bottom: 8px; color: #111; }
+.modal-box p { color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.modal-actions button { padding: 10px 18px; box-shadow: none; }
+.modal-actions .cancel-btn { background: #eef2f7; color: #111; }
+.modal-actions .danger-btn { background: var(--red); color: white; }
+.modal-actions .danger-btn:hover { filter: brightness(.96); box-shadow: none; }
+@keyframes modalIn { from { opacity: 0; transform: scale(.96) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+
+/* ============================
+   FOOTER
+============================ */
+.app-footer {
+  background: #111;
+  color: #ccc;
+  padding: 15px 10px;
+  text-align: center;
+  border-top: 1px solid #333;
+  margin-top: 45px;
+}
+.social-apps { display: flex; justify-content: center; gap: 25px; margin-bottom: 10px; }
+.icon-app { width: 30px; height: 30px; transition: transform 0.3s ease; filter: brightness(0) invert(1); }
+.icon-app:hover { transform: scale(1.2); }
+.copyright { font-size: 13px; color: #777; }
+
+/* ============================
+   RESPONSIVE
+============================ */
+@media (max-width: 900px) {
+  .summary { grid-template-columns: 1fr; }
+  .transaksi-grafik { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  main { padding: 22px 0 0; }
+  .dashboard-topbar { gap: 8px; padding: 10px 12px; }
+  .dashboard-logo { height: 32px; max-width: 135px; }
+  .dashboard-topbar a, .back-btn { width: 36px; height: 36px; }
+  .dashboard-topbar a img, .back-btn img { width: 22px; height: 22px; }
+  .topbar-badge { display: none; }
+  .finance-hero { padding: 0 18px; margin-bottom: 20px; }
+  .hero-badge { font-size: .78rem; padding: 6px 11px; }
+  h1 { font-size: 2.25rem; }
+  .identity, .summary, .transaksi-grafik { width: calc(100% - 24px); }
+  .card { padding: 17px; border-radius: 16px; }
+  .section-title-row { gap: 10px; }
+  .limit-badge { font-size: .72rem; padding: 5px 8px; }
+  .chart-box { min-height: 250px; }
+  .toast-container { top: 68px; right: 12px; width: calc(100% - 24px); }
+  .modal-actions { flex-direction: column-reverse; }
+  .modal-actions button { width: 100%; }
+  .app-footer { margin-top: 35px; }
+}
+
+
+/* ============================
+   SHARED HEADER NAVIGATION
+============================ */
+.app-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.app-nav::-webkit-scrollbar { display: none; }
+.app-nav a {
+  color: rgba(255,255,255,.82);
+  text-decoration: none;
+  padding: 8px 11px;
+  border-radius: 999px;
+  font-size: .86rem;
+  font-weight: 700;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  transition: background .22s ease, color .22s ease, transform .22s ease, border-color .22s ease;
+}
+.app-nav a:hover,
+.app-nav a.active {
+  color: #fff;
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.14);
+  transform: translateY(-1px);
+}
+.dashboard-topbar .topbar-badge,
+.dashboard-topbar .weather {
+  margin-left: 6px;
+  flex: 0 0 auto;
+}
+@media (max-width: 900px) {
+  .dashboard-topbar { flex-wrap: wrap; }
+  .app-nav {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+    padding-top: 2px;
+  }
+  .app-nav a {
+    font-size: .78rem;
+    padding: 7px 9px;
+  }
+}
+@media (max-width: 560px) {
+  .app-nav { gap: 6px; }
+  .app-nav a { font-size: .74rem; padding: 7px 8px; }
+}
+
+
+/* ============================
+   MOBILE BOTTOM SLIDE NAV
+   Muncul di bawah layar saat mode HP, bisa digeser horizontal.
+============================ */
+@media (max-width: 700px) {
+  body {
+    padding-bottom: 86px;
+  }
+
+  .dashboard-topbar {
+    flex-wrap: nowrap;
+  }
+
+  .dashboard-topbar .app-nav {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: 12px;
+    z-index: 3000;
+    width: auto;
+    max-width: none;
+    margin: 0;
+    order: initial;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    background: rgba(17, 17, 17, 0.92);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 22px;
+    box-shadow: 0 14px 34px rgba(0,0,0,.35);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .dashboard-topbar .app-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dashboard-topbar .app-nav a {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    min-width: 76px;
+    padding: 10px 12px;
+    text-align: center;
+    font-size: .76rem;
+    border-radius: 16px;
+    background: rgba(255,255,255,.075);
+    border: 1px solid rgba(255,255,255,.08);
+  }
+
+  .dashboard-topbar .app-nav a:hover,
+  .dashboard-topbar .app-nav a.active {
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    color: #fff;
+    border-color: transparent;
+    transform: translateY(-1px);
+  }
+
+  .dashboard-topbar .topbar-badge {
+    display: none;
+  }
+
+  .dashboard-topbar .weather {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 380px) {
+  .dashboard-topbar .app-nav a {
+    min-width: 70px;
+    font-size: .72rem;
+    padding: 9px 10px;
+  }
+}
+
+
+/* =====================================================
+   FINAL FIX - HEADER DESKTOP + BOTTOM ICON NAV MOBILE
+   Desktop: header rapi.
+   Mobile/HP: menu pindah ke bawah sebagai icon dock.
+===================================================== */
+.dashboard-topbar {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center !important;
+  gap: 14px !important;
+}
+.dashboard-topbar .logo {
+  min-width: 0;
+}
+.dashboard-topbar .app-nav {
+  justify-self: center;
+  margin-left: 0 !important;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.dashboard-topbar .app-nav::-webkit-scrollbar { display: none; }
+.dashboard-topbar .app-nav a {
+  text-decoration: none;
+}
+.dashboard-topbar .topbar-badge,
+.dashboard-topbar .weather {
+  justify-self: end;
+}
+@media (max-width: 1120px) {
+  .dashboard-topbar .topbar-badge { display: none !important; }
+}
+@media (max-width: 900px) {
+  body { padding-bottom: 94px !important; }
+
+  .dashboard-topbar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    min-height: 58px;
+  }
+
+  /* Nav tidak lagi berada di header, tapi fixed di bawah */
+  .dashboard-topbar .app-nav {
+    position: fixed !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 12px !important;
+    top: auto !important;
+    z-index: 99999 !important;
+    width: auto !important;
+    max-width: none !important;
+    height: 70px !important;
+    margin: 0 !important;
+    padding: 8px 10px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    background: rgba(17, 17, 17, 0.94) !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.40) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+  .dashboard-topbar .app-nav::-webkit-scrollbar { display: none; }
+
+  .dashboard-topbar .app-nav a {
+    flex: 0 0 72px !important;
+    width: 72px !important;
+    height: 54px !important;
+    min-width: 72px !important;
+    padding: 7px 6px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    scroll-snap-align: center;
+    text-align: center !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    color: rgba(255,255,255,.78) !important;
+    background: rgba(255,255,255,.075) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    border-radius: 16px !important;
+    transform: none !important;
+  }
+  .dashboard-topbar .app-nav a::before {
+    display: block;
+    font-size: 20px;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .dashboard-topbar .app-nav a::after {
+    display: block;
+    font-size: 10px;
+    line-height: 1.1;
+    font-weight: 700;
+    color: inherit;
+  }
+  .dashboard-topbar .app-nav a:nth-child(1)::before { content: "🏠"; }
+  .dashboard-topbar .app-nav a:nth-child(1)::after { content: "Home"; }
+  .dashboard-topbar .app-nav a:nth-child(2)::before { content: "💰"; }
+  .dashboard-topbar .app-nav a:nth-child(2)::after { content: "Finance"; }
+  .dashboard-topbar .app-nav a:nth-child(3)::before { content: "⏰"; }
+  .dashboard-topbar .app-nav a:nth-child(3)::after { content: "Reminder"; }
+  .dashboard-topbar .app-nav a:nth-child(4)::before { content: "🗓️"; }
+  .dashboard-topbar .app-nav a:nth-child(4)::after { content: "Jadwal"; }
+  .dashboard-topbar .app-nav a:nth-child(5)::before { content: "☁️"; }
+  .dashboard-topbar .app-nav a:nth-child(5)::after { content: "Weather"; }
+  .dashboard-topbar .app-nav a:nth-child(6)::before { content: "📰"; }
+  .dashboard-topbar .app-nav a:nth-child(6)::after { content: "News"; }
+
+  .dashboard-topbar .app-nav a:hover,
+  .dashboard-topbar .app-nav a.active {
+    background: linear-gradient(135deg, var(--blue), var(--green)) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+    transform: translateY(-2px) !important;
+  }
+
+  .dashboard-topbar .topbar-badge { display: none !important; }
+  .dashboard-topbar .weather {
+    margin-left: auto !important;
+    max-width: 132px;
+    overflow: hidden;
+  }
+}
+@media (max-width: 390px) {
+  .dashboard-topbar .app-nav a {
+    flex-basis: 66px !important;
+    width: 66px !important;
+    min-width: 66px !important;
+  }
+  .dashboard-topbar .app-nav a::after { font-size: 9px; }
+}
+
+
+/* =====================================================
+   HEADER NAV FINAL CLEAN FIX
+   Desktop: header rapi, menu teks kecil.
+   Mobile/HP: menu jadi dock icon di bawah, bisa digeser.
+===================================================== */
+@media (min-width: 769px) {
+  .dashboard-topbar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    min-height: 68px !important;
+    padding: 12px 28px !important;
+  }
+
+  .dashboard-topbar .logo {
+    flex: 0 0 auto !important;
+    min-width: 170px !important;
+  }
+
+  .dashboard-topbar .dashboard-logo {
+    height: 44px !important;
+    max-width: 170px !important;
+    object-fit: contain !important;
+  }
+
+  .dashboard-topbar .app-nav {
+    position: static !important;
+    inset: auto !important;
+    order: initial !important;
+    z-index: auto !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: none !important;
+    flex: 1 1 auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    overflow: visible !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .dashboard-topbar .app-nav a {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: auto !important;
+    padding: 8px 11px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: .84rem !important;
+    line-height: 1 !important;
+    font-weight: 700 !important;
+    color: rgba(255,255,255,.82) !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: 999px !important;
+    transform: none !important;
+  }
+
+  .dashboard-topbar .app-nav a::before,
+  .dashboard-topbar .app-nav a::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  .dashboard-topbar .app-nav a:hover,
+  .dashboard-topbar .app-nav a.active {
+    color: #fff !important;
+    background: rgba(255,255,255,.13) !important;
+    border-color: rgba(255,255,255,.16) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  .dashboard-topbar .topbar-badge,
+  .dashboard-topbar .weather {
+    flex: 0 0 auto !important;
+    margin-left: 0 !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1250px) {
+  .dashboard-topbar .logo { min-width: 145px !important; }
+  .dashboard-topbar .dashboard-logo { max-width: 145px !important; }
+  .dashboard-topbar .app-nav { justify-content: flex-end !important; gap: 4px !important; }
+  .dashboard-topbar .app-nav a { padding: 7px 8px !important; font-size: .78rem !important; }
+  .dashboard-topbar .topbar-badge { display: none !important; }
+}
+
+@media (max-width: 768px) {
+  body { padding-bottom: 96px !important; }
+
+  .dashboard-topbar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    min-height: 58px !important;
+    padding: 10px 12px !important;
+  }
+
+  .dashboard-topbar .logo {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .dashboard-topbar .dashboard-logo {
+    height: 32px !important;
+    max-width: 138px !important;
+    object-fit: contain !important;
+  }
+
+  .dashboard-topbar .topbar-badge { display: none !important; }
+
+  .dashboard-topbar .app-nav {
+    position: fixed !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 12px !important;
+    top: auto !important;
+    z-index: 99999 !important;
+    width: auto !important;
+    max-width: none !important;
+    height: 70px !important;
+    margin: 0 !important;
+    padding: 8px 10px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x proximity !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    background: rgba(17,17,17,.95) !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.42) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+
+  .dashboard-topbar .app-nav::-webkit-scrollbar { display: none !important; }
+
+  .dashboard-topbar .app-nav a {
+    flex: 0 0 72px !important;
+    width: 72px !important;
+    min-width: 72px !important;
+    height: 54px !important;
+    padding: 7px 6px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    text-align: center !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    color: rgba(255,255,255,.78) !important;
+    text-decoration: none !important;
+    background: rgba(255,255,255,.075) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    border-radius: 16px !important;
+    transform: none !important;
+    scroll-snap-align: center !important;
+  }
+
+  .dashboard-topbar .app-nav a::before {
+    display: block !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+    margin-bottom: 2px !important;
+  }
+
+  .dashboard-topbar .app-nav a::after {
+    display: block !important;
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+    font-weight: 700 !important;
+    color: inherit !important;
+  }
+
+  .dashboard-topbar .app-nav a:nth-child(1)::before { content: "🏠" !important; }
+  .dashboard-topbar .app-nav a:nth-child(1)::after { content: "Home" !important; }
+  .dashboard-topbar .app-nav a:nth-child(2)::before { content: "💰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(2)::after { content: "Finance" !important; }
+  .dashboard-topbar .app-nav a:nth-child(3)::before { content: "⏰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(3)::after { content: "Reminder" !important; }
+  .dashboard-topbar .app-nav a:nth-child(4)::before { content: "🗓️" !important; }
+  .dashboard-topbar .app-nav a:nth-child(4)::after { content: "Jadwal" !important; }
+  .dashboard-topbar .app-nav a:nth-child(5)::before { content: "☁️" !important; }
+  .dashboard-topbar .app-nav a:nth-child(5)::after { content: "Weather" !important; }
+  .dashboard-topbar .app-nav a:nth-child(6)::before { content: "📰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(6)::after { content: "News" !important; }
+
+  .dashboard-topbar .app-nav a:hover,
+  .dashboard-topbar .app-nav a.active {
+    background: linear-gradient(135deg, var(--blue), var(--green)) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+    transform: translateY(-2px) !important;
+  }
+
+  .dashboard-topbar .weather {
+    flex: 0 0 auto !important;
+    margin-left: 0 !important;
+    max-width: 126px !important;
+    overflow: hidden !important;
+  }
+}
+
+
+/* =====================================================
+   ABSOLUTE FINAL: BOTTOM ICON NAV FOR SMALL/DIVIDED SCREEN
+   Dipakai sampai 1250px supaya saat DevTools dibuka / layar HP,
+   menu tidak numpuk di header dan pasti turun ke bawah.
+===================================================== */
+@media (max-width: 1250px) {
+  body { padding-bottom: 96px !important; }
+
+  .dashboard-topbar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    min-height: 58px !important;
+    padding: 10px 12px !important;
+    overflow: visible !important;
+  }
+
+  .dashboard-topbar .logo {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .dashboard-topbar .dashboard-logo {
+    height: 34px !important;
+    max-width: 150px !important;
+    object-fit: contain !important;
+  }
+
+  .dashboard-topbar .topbar-badge { display: none !important; }
+
+  .dashboard-topbar .app-nav {
+    position: fixed !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 12px !important;
+    top: auto !important;
+    z-index: 2147483647 !important;
+    width: auto !important;
+    max-width: none !important;
+    height: 70px !important;
+    margin: 0 !important;
+    padding: 8px 10px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x proximity !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    background: rgba(17,17,17,.96) !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.44) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+
+  .dashboard-topbar .app-nav::-webkit-scrollbar { display: none !important; }
+
+  .dashboard-topbar .app-nav a {
+    flex: 0 0 72px !important;
+    width: 72px !important;
+    min-width: 72px !important;
+    height: 54px !important;
+    padding: 7px 6px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    text-align: center !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    color: rgba(255,255,255,.78) !important;
+    text-decoration: none !important;
+    background: rgba(255,255,255,.075) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    border-radius: 16px !important;
+    transform: none !important;
+    scroll-snap-align: center !important;
+  }
+
+  .dashboard-topbar .app-nav a::before {
+    display: block !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+    margin-bottom: 2px !important;
+  }
+  .dashboard-topbar .app-nav a::after {
+    display: block !important;
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+    font-weight: 700 !important;
+    color: inherit !important;
+  }
+
+  .dashboard-topbar .app-nav a:nth-child(1)::before { content: "🏠" !important; }
+  .dashboard-topbar .app-nav a:nth-child(1)::after { content: "Home" !important; }
+  .dashboard-topbar .app-nav a:nth-child(2)::before { content: "💰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(2)::after { content: "Finance" !important; }
+  .dashboard-topbar .app-nav a:nth-child(3)::before { content: "⏰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(3)::after { content: "Reminder" !important; }
+  .dashboard-topbar .app-nav a:nth-child(4)::before { content: "🗓️" !important; }
+  .dashboard-topbar .app-nav a:nth-child(4)::after { content: "Jadwal" !important; }
+  .dashboard-topbar .app-nav a:nth-child(5)::before { content: "☁️" !important; }
+  .dashboard-topbar .app-nav a:nth-child(5)::after { content: "Weather" !important; }
+  .dashboard-topbar .app-nav a:nth-child(6)::before { content: "📰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(6)::after { content: "News" !important; }
+
+  .dashboard-topbar .app-nav a:hover,
+  .dashboard-topbar .app-nav a.active {
+    background: linear-gradient(135deg, var(--blue), var(--green)) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+    transform: translateY(-2px) !important;
+  }
+}
+
+@media (min-width: 1251px) {
+  body { padding-bottom: 0 !important; }
+  .dashboard-topbar .app-nav a::before,
+  .dashboard-topbar .app-nav a::after {
+    content: none !important;
+    display: none !important;
+  }
+}
+
+
+/* =====================================================
+   REAL MOBILE BOTTOM NAV FIX
+   Ini nav terpisah di luar header. Di HP nav header disembunyikan,
+   yang muncul cuma dock bawah, jadi tidak mungkin numpuk di header.
+===================================================== */
+.mobile-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 1250px) {
+  body {
+    padding-bottom: 98px !important;
+  }
+
+  /* Hilangkan menu yang ada di header saat layar kecil */
+  .dashboard-topbar .app-nav {
+    display: none !important;
+  }
+
+  .dashboard-topbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    min-height: 58px !important;
+    padding: 10px 12px !important;
+    overflow: visible !important;
+  }
+
+  .dashboard-topbar .topbar-badge {
+    display: none !important;
+  }
+
+  .dashboard-topbar .dashboard-logo {
+    height: 34px !important;
+    max-width: 150px !important;
+    object-fit: contain !important;
+  }
+
+  .mobile-bottom-nav {
+    position: fixed !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 12px !important;
+    z-index: 2147483647 !important;
+    height: 72px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 8px 10px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    background: rgba(17, 17, 17, .96) !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.44) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+
+  .mobile-bottom-nav::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .mobile-bottom-nav a {
+    flex: 0 0 72px !important;
+    width: 72px !important;
+    height: 54px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    text-decoration: none !important;
+    text-align: center !important;
+    color: rgba(255,255,255,.78) !important;
+    background: rgba(255,255,255,.075) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    border-radius: 16px !important;
+  }
+
+  .mobile-bottom-nav a span {
+    font-size: 20px !important;
+    line-height: 1 !important;
+  }
+
+  .mobile-bottom-nav a small {
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+    font-weight: 700 !important;
+  }
+
+  .mobile-bottom-nav a.active,
+  .mobile-bottom-nav a:hover {
+    background: linear-gradient(135deg, var(--blue), var(--green)) !important;
+    color: white !important;
+    border-color: transparent !important;
+    transform: translateY(-2px) !important;
+  }
+}
+
+@media (min-width: 1251px) {
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+}

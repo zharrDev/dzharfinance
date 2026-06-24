@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../assets/mk.png" sizes="64x64">
+  <title>DzharFinance - Login</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/login.css" />
+</head>
+<body>
+  <main class="auth-page">
+    <a href="../index.html" class="home-link" aria-label="Kembali ke homepage">← Home</a>
+    <nav class="auth-nav" aria-label="Navigasi auth">
+      <a href="../index.html">Home</a>
+      <a href="login.html" class="active">Login</a>
+      <a href="register.html">Register</a>
+    </nav>
+
+    <section class="auth-container">
+      <aside class="auth-left">
+        <img src="../assets/logooo.png" alt="DzharFinance Logo" class="auth-logo">
+        <div class="illustration-wrap">
+          <img src="../assets/img.png" alt="Ilustrasi login DzharFinance" class="auth-illustration">
+        </div>
+        <div class="auth-copy">
+          <span>Welcome Back</span>
+          <h1>Kelola uang, waktu, cuaca, dan berita dalam satu tempat.</h1>
+          <p>Masuk untuk melanjutkan aktivitasmu di DzharFinance.</p>
+        </div>
+      </aside>
+
+      <section class="auth-right">
+        <div class="mobile-brand">
+          <img src="../assets/logooo.png" alt="DzharFinance Logo">
+        </div>
+
+        <span class="auth-badge">DzharFinance Account</span>
+        <h2>Log-in</h2>
+        <p class="auth-subtitle">Masukkan email dan password untuk melanjutkan.</p>
+
+        <form id="loginForm">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="Enter your email" required autocomplete="email" />
+
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password" />
+
+          <div class="remember">
+            <input type="checkbox" id="remember" />
+            <label for="remember">Remember Me</label>
+          </div>
+
+          <button type="submit" id="loginBtn">Login</button>
+        </form>
+
+        <p class="register-link">
+          Belum punya akun? <a href="register.html"><b>Daftar di sini</b></a>
+        </p>
+      </section>
+    </section>
+  </main>
+
+  <script src="../js/login.js"></script>
+</body>
+</html>

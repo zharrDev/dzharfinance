@@ -1,0 +1,22 @@
+@import url('./login.css');
+
+/* Register only small adjustments */
+.auth-left.register-left {
+  background: linear-gradient(135deg, rgba(5,194,39,.92), rgba(7,140,212,.96) 62%, rgba(247,184,1,.72));
+}
+
+.auth-illustration.kotono {
+  width: min(440px, 100%);
+}
+
+@media (max-width: 860px) {
+  .auth-illustration.kotono {
+    width: 150px;
+  }
+}
+
+@media (max-width: 520px) {
+  .auth-illustration.kotono {
+    width: 108px;
+  }
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../assets/mk.png" sizes="64x64">
+  <title>DzharFinance - Jadwal Mingguan</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/jadwal.css" />
+</head>
+<body>
+  <header class="dashboard-topbar">
+    <div class="logo">
+      <a href="reminder.html" class="back-btn" aria-label="Kembali ke reminder">
+        <img src="../assets/arrow.png" alt="back">
+      </a>
+      <img src="../assets/logooo.png" alt="DzharFinance Logo" class="dashboard-logo">
+    </div>
+    <nav class="app-nav" aria-label="Navigasi halaman">
+      <a href="../index.html">Home</a>
+      <a href="dashboard.html">Finance</a>
+      <a href="reminder.html">Reminder</a>
+      <a href="jadwal.html" class="active">Jadwal</a>
+      <a href="weather.html">Weather</a>
+      <a href="news.html">News</a>
+    </nav>
+    <span class="topbar-badge">Weekly Schedule</span>
+  </header>
+
+  <nav class="mobile-bottom-nav" aria-label="Navigasi mobile">
+    <a href="../index.html"><span>🏠</span><small>Home</small></a>
+    <a href="dashboard.html"><span>💰</span><small>Finance</small></a>
+    <a href="reminder.html"><span>⏰</span><small>Reminder</small></a>
+    <a href="jadwal.html" class="active"><span>🗓️</span><small>Jadwal</small></a>
+    <a href="weather.html"><span>☁️</span><small>Weather</small></a>
+    <a href="news.html"><span>📰</span><small>News</small></a>
+  </nav>
+
+
+  <main class="container">
+    <section class="jadwal-hero">
+      <span class="hero-badge">DzharFinance Planner</span>
+      <h1>🗓️ Buat Jadwal Mingguan Kamu</h1>
+      <p>Susun kegiatan tiap hari dengan rapi, konsisten, dan matching dengan tampilan Time Management DzharFinance.</p>
+    </section>
+
+    <form id="jadwalForm" class="jadwal-form">
+      <div class="hari-wrapper" id="hariWrapper"></div>
+
+      <div class="save-panel">
+        <p>Pastikan semua jam dan kegiatan sudah sesuai sebelum disimpan.</p>
+        <button type="submit" class="btn-simpan" id="saveScheduleBtn">Simpan Jadwal</button>
+      </div>
+    </form>
+
+    <div id="hasilTampilan"></div>
+  </main>
+
+  <div id="customPopup" class="popup-overlay hidden" aria-hidden="true">
+    <div class="popup-content" role="dialog" aria-modal="true">
+      <div id="popupIcon" class="popup-icon">✅</div>
+      <h3 id="popupTitle">Berhasil</h3>
+      <p id="popupMessage">Jadwal berhasil disimpan!</p>
+      <button id="popupButton" class="popup-btn" type="button">OK</button>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <div class="social-apps">
+      <a href="https://www.instagram.com/dzhar.hrahap" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/ig.png" alt="Instagram" class="icon-app" />
+      </a>
+      <a href="https://wa.me/628123456789?text=Halo%20saya%20ingin%20bertanya" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/wa.png" alt="WhatsApp" class="icon-app" />
+      </a>
+      <a href="https://www.facebook.com/izhar.syafawi.harahap" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/fb.png" alt="Facebook" class="icon-app" />
+      </a>
+    </div>
+    <div class="copyright">
+      &copy; 2025 created by ican.
+    </div>
+  </footer>
+
+  <script src="../js/jadwal.js"></script>
+</body>
+</html>

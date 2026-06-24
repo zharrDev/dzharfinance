@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../assets/mk.png" sizes="64x64">
+  <title>DzharFinance - Manage Finances</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="dashboard-topbar">
+    <div class="logo">
+      <a href="../index.html" class="back-btn" aria-label="Kembali ke homepage">
+        <img src="../assets/arrow.png" alt="back">
+      </a>
+      <img src="../assets/logooo.png" alt="DzharFinance Logo" class="dashboard-logo">
+    </div>
+    <nav class="app-nav" aria-label="Navigasi halaman">
+      <a href="../index.html">Home</a>
+      <a href="dashboard.html" class="active">Finance</a>
+      <a href="reminder.html">Reminder</a>
+      <a href="jadwal.html">Jadwal</a>
+      <a href="weather.html">Weather</a>
+      <a href="news.html">News</a>
+    </nav>
+    <span class="topbar-badge">Finance Dashboard</span>
+  </header>
+
+  <nav class="mobile-bottom-nav" aria-label="Navigasi mobile">
+    <a href="../index.html"><span>🏠</span><small>Home</small></a>
+    <a href="dashboard.html" class="active"><span>💰</span><small>Finance</small></a>
+    <a href="reminder.html"><span>⏰</span><small>Reminder</small></a>
+    <a href="jadwal.html"><span>🗓️</span><small>Jadwal</small></a>
+    <a href="weather.html"><span>☁️</span><small>Weather</small></a>
+    <a href="news.html"><span>📰</span><small>News</small></a>
+  </nav>
+
+
+  <main>
+    <section class="finance-hero">
+      <span class="hero-badge">DzharFinance Wallet</span>
+      <h1>Manage Finances</h1>
+      <p id="current-time">Memuat waktu...</p>
+    </section>
+
+    <section class="card identity">
+      <div class="section-title-row">
+        <div>
+          <p class="card-label">Wallet Identity</p>
+          <h3>Informasi Kartu</h3>
+        </div>
+        <span class="limit-badge">DANA / HP</span>
+      </div>
+
+      <div id="card-view" class="card-view">
+        <p>No HP / DANA: <span id="card-number">Belum diisi</span></p>
+        <button type="button" id="edit-card">Edit Nomor</button>
+      </div>
+
+      <div id="card-form" class="card-form">
+        <label for="card-input">Nomor HP / DANA</label>
+        <input type="text" id="card-input" maxlength="15" inputmode="numeric" placeholder="Masukkan 9–15 digit angka">
+        <button type="button" id="save-card">Simpan Nomor</button>
+      </div>
+    </section>
+
+    <section class="summary hidden" aria-label="Ringkasan keuangan">
+      <div class="card summary-card income-card">
+        <p class="card-label">Total</p>
+        <h3>Pemasukan</h3>
+        <p id="total-income" class="money-value">Rp 0</p>
+        <small id="usd-income"></small>
+      </div>
+
+      <div class="card summary-card expense-card">
+        <p class="card-label">Total</p>
+        <h3>Pengeluaran</h3>
+        <p id="total-expense" class="money-value">Rp 0</p>
+        <small id="usd-expense"></small>
+      </div>
+
+      <div class="card summary-card balance-card">
+        <p class="card-label">Current</p>
+        <h3>Saldo</h3>
+        <p id="balance" class="money-value">Rp 0</p>
+        <small id="usd-balance"></small>
+      </div>
+    </section>
+
+    <section class="transaksi-grafik hidden" aria-label="Transaksi dan grafik">
+      <div class="card chart">
+        <div class="section-title-row">
+          <div>
+            <p class="card-label">Analytics</p>
+            <h3>Grafik Keuangan</h3>
+          </div>
+        </div>
+        <div class="chart-box">
+          <canvas id="financeChart"></canvas>
+        </div>
+      </div>
+
+      <div class="form-transaksi card">
+        <p class="card-label">New Transaction</p>
+        <h3>Catat Transaksi</h3>
+
+        <label for="jumlah">Jumlah (Rp)</label>
+        <input type="number" id="jumlah" placeholder="Contoh: 50000" min="1">
+
+        <label for="keterangan">Keterangan</label>
+        <input type="text" id="keterangan" placeholder="Contoh: Uang jajan, makan...">
+
+        <label for="jenis">Jenis Transaksi</label>
+        <select id="jenis">
+          <option value="pemasukan">Pemasukan</option>
+          <option value="pengeluaran">Pengeluaran</option>
+        </select>
+
+        <button type="button" id="submit-transaksi">Simpan Transaksi</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="social-apps">
+      <a href="https://www.instagram.com/dzhar.hrahap" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/ig.png" alt="Instagram" class="icon-app" />
+      </a>
+      <a href="https://wa.me/628123456789?text=Halo%20saya%20ingin%20bertanya" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/wa.png" alt="WhatsApp" class="icon-app" />
+      </a>
+      <a href="https://www.facebook.com/izhar.syafawi.harahap" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/fb.png" alt="Facebook" class="icon-app" />
+      </a>
+    </div>
+    <div class="copyright">
+      &copy; 2025 created by ican.
+    </div>
+  </footer>
+
+  <script src="../js/dashboard.js" defer></script>
+</body>
+</html>

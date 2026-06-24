@@ -1,0 +1,1200 @@
+/* ============================
+   DzharFinance Jadwal Mingguan
+   Matching Reminder/Homepage colors: dark topbar, clock-time theme,
+   white cards, blue (#078cd4), green (#05c227), yellow (#f7b801)
+============================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  --dark: #0d0d0d;
+  --topbar: #111;
+  --white: #ffffff;
+  --soft: #f8f9fa;
+  --text: #273442;
+  --muted: #667085;
+  --blue: #078cd4;
+  --green: #05c227;
+  --yellow: #f7b801;
+  --red: #e74c3c;
+  --border: #e4e9f0;
+  --card-shadow: 0 14px 35px rgba(0, 0, 0, 0.18);
+  --soft-shadow: 0 7px 18px rgba(0, 0, 0, 0.10);
+}
+
+html { min-width: 320px; }
+
+body {
+  min-height: 100vh;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  background: var(--dark);
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+}
+
+button,
+input,
+textarea { font: inherit; }
+button { cursor: pointer; }
+img { max-width: 100%; display: block; }
+
+/* Background statis tema jadwal & waktu */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(7, 140, 212, 0.36), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(5, 194, 39, 0.18), transparent 28%),
+    radial-gradient(circle at 50% 92%, rgba(247, 184, 1, 0.12), transparent 32%),
+    linear-gradient(135deg, #07111f 0%, #0d0d0d 48%, #102033 100%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(0,0,0,.22), rgba(0,0,0,.55)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='760' viewBox='0 0 1000 760'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.105)' stroke-width='3'%3E%3Ccircle cx='780' cy='170' r='106'/%3E%3Cpath d='M780 102v68l48 32' stroke-linecap='round'/%3E%3Crect x='110' y='480' width='210' height='150' rx='24'/%3E%3Cpath d='M110 525h210M155 455v50M275 455v50' stroke-linecap='round'/%3E%3Cpath d='M148 565h28M205 565h28M262 565h28M148 605h28M205 605h28M262 605h28'/%3E%3C/g%3E%3Cg fill='rgba(255,255,255,0.08)'%3E%3Ccircle cx='780' cy='64' r='5'/%3E%3Ccircle cx='886' cy='170' r='5'/%3E%3Ccircle cx='780' cy='276' r='5'/%3E%3Ccircle cx='674' cy='170' r='5'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: min(1000px, 125vw) auto;
+}
+
+/* ============================
+   TOPBAR
+============================ */
+.dashboard-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 32px;
+  background: rgba(17, 17, 17, 0.92);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 18px rgba(0,0,0,.25);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.dashboard-topbar a,
+.back-btn {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  transition: transform 0.25s ease, background 0.25s ease;
+  flex: 0 0 auto;
+}
+.dashboard-topbar a:hover,
+.back-btn:hover {
+  transform: translateX(-3px) scale(1.05);
+  background: rgba(255,255,255,.09);
+}
+.dashboard-topbar a img,
+.back-btn img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+.dashboard-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+.topbar-badge {
+  padding: 8px 13px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  color: #e8f7ff;
+  font-size: .85rem;
+  font-weight: 700;
+  border: 1px solid rgba(255,255,255,.12);
+  white-space: nowrap;
+}
+
+/* ============================
+   HERO + CONTAINER
+============================ */
+.container {
+  flex: 1;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 38px 20px 0;
+}
+
+.jadwal-hero {
+  color: white;
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 28px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 14px;
+  margin-bottom: 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.12);
+  color: #e8f7ff;
+  border: 1px solid rgba(255,255,255,.16);
+  font-size: .85rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+h1 {
+  font-size: clamp(2rem, 5vw, 3.7rem);
+  line-height: 1.12;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 4px 18px rgba(0,0,0,.45);
+  margin-bottom: 10px;
+}
+.jadwal-hero p {
+  color: #d6d6d6;
+  font-size: clamp(.95rem, 2.4vw, 1.08rem);
+  line-height: 1.7;
+}
+
+/* ============================
+   CARD HARI
+============================ */
+.hari-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.hari-card {
+  background: rgba(255,255,255,0.96);
+  border-radius: 18px;
+  padding: 21px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255,255,255,.55);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.hari-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--blue), var(--green));
+}
+.hari-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 42px rgba(0,0,0,.24);
+}
+.hari-card h2 {
+  font-size: 1.35rem;
+  color: #111;
+  margin-bottom: 16px;
+  padding-top: 4px;
+}
+.hari-card label {
+  display: block;
+  font-weight: 700;
+  color: var(--blue);
+  font-size: .82rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 8px;
+}
+.hari-card textarea,
+.kegiatan-row input {
+  width: 100%;
+  border: 1px solid #d0d7de;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  transition: border .2s ease, box-shadow .2s ease;
+}
+.hari-card textarea {
+  min-height: 78px;
+  padding: 12px;
+  resize: vertical;
+}
+.hari-card textarea:focus,
+.kegiatan-row input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(7,140,212,.16);
+}
+
+.kegiatan-container {
+  margin-top: 17px;
+}
+.kegiatan-row {
+  display: grid;
+  grid-template-columns: 112px 1fr 40px;
+  gap: 10px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+.kegiatan-row input {
+  min-height: 42px;
+  padding: 10px 11px;
+}
+.delete-btn {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: #fff0f0;
+  color: var(--red);
+  border: 1px solid #ffd1d1;
+  border-radius: 11px;
+  transition: transform .2s ease, background .2s ease, color .2s ease;
+}
+.delete-btn:hover {
+  background: var(--red);
+  color: #fff;
+  transform: scale(1.06);
+}
+.delete-btn svg {
+  width: 18px;
+  height: 18px;
+}
+.add-activity-btn,
+.btn-simpan,
+.popup-btn {
+  border: none;
+  background: linear-gradient(135deg, var(--blue), var(--green));
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(7, 140, 212, .22);
+  transition: filter .25s ease, transform .2s ease, box-shadow .2s ease;
+}
+.add-activity-btn {
+  width: 100%;
+  margin-top: 6px;
+  padding: 11px 16px;
+}
+.add-activity-btn:hover,
+.btn-simpan:hover,
+.popup-btn:hover {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(5, 194, 39, .24);
+}
+
+/* ============================
+   SAVE PANEL
+============================ */
+.save-panel {
+  width: min(720px, 100%);
+  margin: 32px auto 0;
+  padding: 18px;
+  display: grid;
+  gap: 14px;
+  text-align: center;
+  background: rgba(255,255,255,0.96);
+  border-radius: 18px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255,255,255,.55);
+}
+.save-panel p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+.btn-simpan {
+  width: 100%;
+  padding: 15px 18px;
+  font-size: 1rem;
+}
+.btn-simpan.is-loading {
+  opacity: .82;
+  pointer-events: none;
+}
+
+/* ============================
+   CUSTOM POPUP
+============================ */
+.hidden { display: none !important; }
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.62);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  z-index: 9998;
+}
+.popup-content {
+  width: min(390px, 100%);
+  background: white;
+  padding: 24px 22px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 18px 45px rgba(0,0,0,.35);
+  animation: modalIn .25s ease both;
+}
+.popup-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+.popup-content h3 {
+  color: #111;
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+}
+.popup-content p {
+  color: var(--muted);
+  line-height: 1.65;
+}
+.popup-btn {
+  margin-top: 18px;
+  padding: 11px 28px;
+}
+.popup-btn.error {
+  background: linear-gradient(135deg, var(--red), #ff7a59);
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(.96) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ============================
+   FOOTER
+============================ */
+.app-footer {
+  background: #111;
+  color: #ccc;
+  padding: 15px 10px;
+  text-align: center;
+  border-top: 1px solid #333;
+  margin-top: 45px;
+}
+.social-apps {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 10px;
+}
+.icon-app {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+  filter: brightness(0) invert(1);
+}
+.icon-app:hover { transform: scale(1.2); }
+.copyright { font-size: 13px; color: #777; }
+
+/* ============================
+   RESPONSIVE
+============================ */
+@media (max-width: 1100px) {
+  .hari-wrapper { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 760px) {
+  .dashboard-topbar { padding: 12px 16px; }
+  .container { padding: 30px 14px 0; }
+  .hari-wrapper { grid-template-columns: 1fr; }
+  .hari-card { padding: 18px; }
+}
+
+@media (max-width: 560px) {
+  .dashboard-topbar { gap: 8px; padding: 10px 12px; }
+  .dashboard-logo { height: 32px; max-width: 135px; }
+  .dashboard-topbar a,
+  .back-btn { width: 36px; height: 36px; }
+  .dashboard-topbar a img,
+  .back-btn img { width: 22px; height: 22px; }
+  .topbar-badge { display: none; }
+  .container { padding: 22px 12px 0; }
+  .hero-badge { font-size: .78rem; padding: 6px 11px; }
+  h1 { font-size: 2rem; }
+  .jadwal-hero p { font-size: .92rem; }
+  .kegiatan-row { grid-template-columns: 1fr; }
+  .delete-btn { width: 100%; height: 40px; }
+  .save-panel { padding: 16px; }
+  .popup-content { padding: 22px 18px; }
+  .app-footer { margin-top: 35px; }
+}
+
+
+/* ============================
+   SHARED HEADER NAVIGATION
+============================ */
+.app-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.app-nav::-webkit-scrollbar { display: none; }
+.app-nav a {
+  color: rgba(255,255,255,.82);
+  text-decoration: none;
+  padding: 8px 11px;
+  border-radius: 999px;
+  font-size: .86rem;
+  font-weight: 700;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  transition: background .22s ease, color .22s ease, transform .22s ease, border-color .22s ease;
+}
+.app-nav a:hover,
+.app-nav a.active {
+  color: #fff;
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.14);
+  transform: translateY(-1px);
+}
+.dashboard-topbar .topbar-badge,
+.dashboard-topbar .weather {
+  margin-left: 6px;
+  flex: 0 0 auto;
+}
+@media (max-width: 900px) {
+  .dashboard-topbar { flex-wrap: wrap; }
+  .app-nav {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+    padding-top: 2px;
+  }
+  .app-nav a {
+    font-size: .78rem;
+    padding: 7px 9px;
+  }
+}
+@media (max-width: 560px) {
+  .app-nav { gap: 6px; }
+  .app-nav a { font-size: .74rem; padding: 7px 8px; }
+}
+
+
+/* ============================
+   MOBILE BOTTOM SLIDE NAV
+   Muncul di bawah layar saat mode HP, bisa digeser horizontal.
+============================ */
+@media (max-width: 700px) {
+  body {
+    padding-bottom: 86px;
+  }
+
+  .dashboard-topbar {
+    flex-wrap: nowrap;
+  }
+
+  .dashboard-topbar .app-nav {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: 12px;
+    z-index: 3000;
+    width: auto;
+    max-width: none;
+    margin: 0;
+    order: initial;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    background: rgba(17, 17, 17, 0.92);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 22px;
+    box-shadow: 0 14px 34px rgba(0,0,0,.35);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .dashboard-topbar .app-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dashboard-topbar .app-nav a {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    min-width: 76px;
+    padding: 10px 12px;
+    text-align: center;
+    font-size: .76rem;
+    border-radius: 16px;
+    background: rgba(255,255,255,.075);
+    border: 1px solid rgba(255,255,255,.08);
+  }
+
+  .dashboard-topbar .app-nav a:hover,
+  .dashboard-topbar .app-nav a.active {
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    color: #fff;
+    border-color: transparent;
+    transform: translateY(-1px);
+  }
+
+  .dashboard-topbar .topbar-badge {
+    display: none;
+  }
+
+  .dashboard-topbar .weather {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 380px) {
+  .dashboard-topbar .app-nav a {
+    min-width: 70px;
+    font-size: .72rem;
+    padding: 9px 10px;
+  }
+}
+
+
+/* =====================================================
+   FINAL FIX - HEADER DESKTOP + BOTTOM ICON NAV MOBILE
+   Desktop: header rapi.
+   Mobile/HP: menu pindah ke bawah sebagai icon dock.
+===================================================== */
+.dashboard-topbar {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center !important;
+  gap: 14px !important;
+}
+.dashboard-topbar .logo {
+  min-width: 0;
+}
+.dashboard-topbar .app-nav {
+  justify-self: center;
+  margin-left: 0 !important;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.dashboard-topbar .app-nav::-webkit-scrollbar { display: none; }
+.dashboard-topbar .app-nav a {
+  text-decoration: none;
+}
+.dashboard-topbar .topbar-badge,
+.dashboard-topbar .weather {
+  justify-self: end;
+}
+@media (max-width: 1120px) {
+  .dashboard-topbar .topbar-badge { display: none !important; }
+}
+@media (max-width: 900px) {
+  body { padding-bottom: 94px !important; }
+
+  .dashboard-topbar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    min-height: 58px;
+  }
+
+  /* Nav tidak lagi berada di header, tapi fixed di bawah */
+  .dashboard-topbar .app-nav {
+    position: fixed !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 12px !important;
+    top: auto !important;
+    z-index: 99999 !important;
+    width: auto !important;
+    max-width: none !important;
+    height: 70px !important;
+    margin: 0 !important;
+    padding: 8px 10px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    background: rgba(17, 17, 17, 0.94) !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.40) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+  .dashboard-topbar .app-nav::-webkit-scrollbar { display: none; }
+
+  .dashboard-topbar .app-nav a {
+    flex: 0 0 72px !important;
+    width: 72px !important;
+    height: 54px !important;
+    min-width: 72px !important;
+    padding: 7px 6px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    scroll-snap-align: center;
+    text-align: center !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    color: rgba(255,255,255,.78) !important;
+    background: rgba(255,255,255,.075) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    border-radius: 16px !important;
+    transform: none !important;
+  }
+  .dashboard-topbar .app-nav a::before {
+    display: block;
+    font-size: 20px;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .dashboard-topbar .app-nav a::after {
+    display: block;
+    font-size: 10px;
+    line-height: 1.1;
+    font-weight: 700;
+    color: inherit;
+  }
+  .dashboard-topbar .app-nav a:nth-child(1)::before { content: "🏠"; }
+  .dashboard-topbar .app-nav a:nth-child(1)::after { content: "Home"; }
+  .dashboard-topbar .app-nav a:nth-child(2)::before { content: "💰"; }
+  .dashboard-topbar .app-nav a:nth-child(2)::after { content: "Finance"; }
+  .dashboard-topbar .app-nav a:nth-child(3)::before { content: "⏰"; }
+  .dashboard-topbar .app-nav a:nth-child(3)::after { content: "Reminder"; }
+  .dashboard-topbar .app-nav a:nth-child(4)::before { content: "🗓️"; }
+  .dashboard-topbar .app-nav a:nth-child(4)::after { content: "Jadwal"; }
+  .dashboard-topbar .app-nav a:nth-child(5)::before { content: "☁️"; }
+  .dashboard-topbar .app-nav a:nth-child(5)::after { content: "Weather"; }
+  .dashboard-topbar .app-nav a:nth-child(6)::before { content: "📰"; }
+  .dashboard-topbar .app-nav a:nth-child(6)::after { content: "News"; }
+
+  .dashboard-topbar .app-nav a:hover,
+  .dashboard-topbar .app-nav a.active {
+    background: linear-gradient(135deg, var(--blue), var(--green)) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+    transform: translateY(-2px) !important;
+  }
+
+  .dashboard-topbar .topbar-badge { display: none !important; }
+  .dashboard-topbar .weather {
+    margin-left: auto !important;
+    max-width: 132px;
+    overflow: hidden;
+  }
+}
+@media (max-width: 390px) {
+  .dashboard-topbar .app-nav a {
+    flex-basis: 66px !important;
+    width: 66px !important;
+    min-width: 66px !important;
+  }
+  .dashboard-topbar .app-nav a::after { font-size: 9px; }
+}
+
+
+/* =====================================================
+   HEADER NAV FINAL CLEAN FIX
+   Desktop: header rapi, menu teks kecil.
+   Mobile/HP: menu jadi dock icon di bawah, bisa digeser.
+===================================================== */
+@media (min-width: 769px) {
+  .dashboard-topbar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    min-height: 68px !important;
+    padding: 12px 28px !important;
+  }
+
+  .dashboard-topbar .logo {
+    flex: 0 0 auto !important;
+    min-width: 170px !important;
+  }
+
+  .dashboard-topbar .dashboard-logo {
+    height: 44px !important;
+    max-width: 170px !important;
+    object-fit: contain !important;
+  }
+
+  .dashboard-topbar .app-nav {
+    position: static !important;
+    inset: auto !important;
+    order: initial !important;
+    z-index: auto !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: none !important;
+    flex: 1 1 auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    overflow: visible !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .dashboard-topbar .app-nav a {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: auto !important;
+    padding: 8px 11px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: .84rem !important;
+    line-height: 1 !important;
+    font-weight: 700 !important;
+    color: rgba(255,255,255,.82) !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: 999px !important;
+    transform: none !important;
+  }
+
+  .dashboard-topbar .app-nav a::before,
+  .dashboard-topbar .app-nav a::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  .dashboard-topbar .app-nav a:hover,
+  .dashboard-topbar .app-nav a.active {
+    color: #fff !important;
+    background: rgba(255,255,255,.13) !important;
+    border-color: rgba(255,255,255,.16) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  .dashboard-topbar .topbar-badge,
+  .dashboard-topbar .weather {
+    flex: 0 0 auto !important;
+    margin-left: 0 !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1250px) {
+  .dashboard-topbar .logo { min-width: 145px !important; }
+  .dashboard-topbar .dashboard-logo { max-width: 145px !important; }
+  .dashboard-topbar .app-nav { justify-content: flex-end !important; gap: 4px !important; }
+  .dashboard-topbar .app-nav a { padding: 7px 8px !important; font-size: .78rem !important; }
+  .dashboard-topbar .topbar-badge { display: none !important; }
+}
+
+@media (max-width: 768px) {
+  body { padding-bottom: 96px !important; }
+
+  .dashboard-topbar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    min-height: 58px !important;
+    padding: 10px 12px !important;
+  }
+
+  .dashboard-topbar .logo {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .dashboard-topbar .dashboard-logo {
+    height: 32px !important;
+    max-width: 138px !important;
+    object-fit: contain !important;
+  }
+
+  .dashboard-topbar .topbar-badge { display: none !important; }
+
+  .dashboard-topbar .app-nav {
+    position: fixed !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 12px !important;
+    top: auto !important;
+    z-index: 99999 !important;
+    width: auto !important;
+    max-width: none !important;
+    height: 70px !important;
+    margin: 0 !important;
+    padding: 8px 10px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x proximity !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    background: rgba(17,17,17,.95) !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.42) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+
+  .dashboard-topbar .app-nav::-webkit-scrollbar { display: none !important; }
+
+  .dashboard-topbar .app-nav a {
+    flex: 0 0 72px !important;
+    width: 72px !important;
+    min-width: 72px !important;
+    height: 54px !important;
+    padding: 7px 6px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    text-align: center !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    color: rgba(255,255,255,.78) !important;
+    text-decoration: none !important;
+    background: rgba(255,255,255,.075) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    border-radius: 16px !important;
+    transform: none !important;
+    scroll-snap-align: center !important;
+  }
+
+  .dashboard-topbar .app-nav a::before {
+    display: block !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+    margin-bottom: 2px !important;
+  }
+
+  .dashboard-topbar .app-nav a::after {
+    display: block !important;
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+    font-weight: 700 !important;
+    color: inherit !important;
+  }
+
+  .dashboard-topbar .app-nav a:nth-child(1)::before { content: "🏠" !important; }
+  .dashboard-topbar .app-nav a:nth-child(1)::after { content: "Home" !important; }
+  .dashboard-topbar .app-nav a:nth-child(2)::before { content: "💰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(2)::after { content: "Finance" !important; }
+  .dashboard-topbar .app-nav a:nth-child(3)::before { content: "⏰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(3)::after { content: "Reminder" !important; }
+  .dashboard-topbar .app-nav a:nth-child(4)::before { content: "🗓️" !important; }
+  .dashboard-topbar .app-nav a:nth-child(4)::after { content: "Jadwal" !important; }
+  .dashboard-topbar .app-nav a:nth-child(5)::before { content: "☁️" !important; }
+  .dashboard-topbar .app-nav a:nth-child(5)::after { content: "Weather" !important; }
+  .dashboard-topbar .app-nav a:nth-child(6)::before { content: "📰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(6)::after { content: "News" !important; }
+
+  .dashboard-topbar .app-nav a:hover,
+  .dashboard-topbar .app-nav a.active {
+    background: linear-gradient(135deg, var(--blue), var(--green)) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+    transform: translateY(-2px) !important;
+  }
+
+  .dashboard-topbar .weather {
+    flex: 0 0 auto !important;
+    margin-left: 0 !important;
+    max-width: 126px !important;
+    overflow: hidden !important;
+  }
+}
+
+
+/* =====================================================
+   ABSOLUTE FINAL: BOTTOM ICON NAV FOR SMALL/DIVIDED SCREEN
+   Dipakai sampai 1250px supaya saat DevTools dibuka / layar HP,
+   menu tidak numpuk di header dan pasti turun ke bawah.
+===================================================== */
+@media (max-width: 1250px) {
+  body { padding-bottom: 96px !important; }
+
+  .dashboard-topbar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    min-height: 58px !important;
+    padding: 10px 12px !important;
+    overflow: visible !important;
+  }
+
+  .dashboard-topbar .logo {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .dashboard-topbar .dashboard-logo {
+    height: 34px !important;
+    max-width: 150px !important;
+    object-fit: contain !important;
+  }
+
+  .dashboard-topbar .topbar-badge { display: none !important; }
+
+  .dashboard-topbar .app-nav {
+    position: fixed !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 12px !important;
+    top: auto !important;
+    z-index: 2147483647 !important;
+    width: auto !important;
+    max-width: none !important;
+    height: 70px !important;
+    margin: 0 !important;
+    padding: 8px 10px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x proximity !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    background: rgba(17,17,17,.96) !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.44) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+
+  .dashboard-topbar .app-nav::-webkit-scrollbar { display: none !important; }
+
+  .dashboard-topbar .app-nav a {
+    flex: 0 0 72px !important;
+    width: 72px !important;
+    min-width: 72px !important;
+    height: 54px !important;
+    padding: 7px 6px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    text-align: center !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    color: rgba(255,255,255,.78) !important;
+    text-decoration: none !important;
+    background: rgba(255,255,255,.075) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    border-radius: 16px !important;
+    transform: none !important;
+    scroll-snap-align: center !important;
+  }
+
+  .dashboard-topbar .app-nav a::before {
+    display: block !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+    margin-bottom: 2px !important;
+  }
+  .dashboard-topbar .app-nav a::after {
+    display: block !important;
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+    font-weight: 700 !important;
+    color: inherit !important;
+  }
+
+  .dashboard-topbar .app-nav a:nth-child(1)::before { content: "🏠" !important; }
+  .dashboard-topbar .app-nav a:nth-child(1)::after { content: "Home" !important; }
+  .dashboard-topbar .app-nav a:nth-child(2)::before { content: "💰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(2)::after { content: "Finance" !important; }
+  .dashboard-topbar .app-nav a:nth-child(3)::before { content: "⏰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(3)::after { content: "Reminder" !important; }
+  .dashboard-topbar .app-nav a:nth-child(4)::before { content: "🗓️" !important; }
+  .dashboard-topbar .app-nav a:nth-child(4)::after { content: "Jadwal" !important; }
+  .dashboard-topbar .app-nav a:nth-child(5)::before { content: "☁️" !important; }
+  .dashboard-topbar .app-nav a:nth-child(5)::after { content: "Weather" !important; }
+  .dashboard-topbar .app-nav a:nth-child(6)::before { content: "📰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(6)::after { content: "News" !important; }
+
+  .dashboard-topbar .app-nav a:hover,
+  .dashboard-topbar .app-nav a.active {
+    background: linear-gradient(135deg, var(--blue), var(--green)) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+    transform: translateY(-2px) !important;
+  }
+}
+
+@media (min-width: 1251px) {
+  body { padding-bottom: 0 !important; }
+  .dashboard-topbar .app-nav a::before,
+  .dashboard-topbar .app-nav a::after {
+    content: none !important;
+    display: none !important;
+  }
+}
+
+
+/* =====================================================
+   REAL MOBILE BOTTOM NAV FIX
+   Ini nav terpisah di luar header. Di HP nav header disembunyikan,
+   yang muncul cuma dock bawah, jadi tidak mungkin numpuk di header.
+===================================================== */
+.mobile-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 1250px) {
+  body {
+    padding-bottom: 98px !important;
+  }
+
+  /* Hilangkan menu yang ada di header saat layar kecil */
+  .dashboard-topbar .app-nav {
+    display: none !important;
+  }
+
+  .dashboard-topbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    min-height: 58px !important;
+    padding: 10px 12px !important;
+    overflow: visible !important;
+  }
+
+  .dashboard-topbar .topbar-badge {
+    display: none !important;
+  }
+
+  .dashboard-topbar .dashboard-logo {
+    height: 34px !important;
+    max-width: 150px !important;
+    object-fit: contain !important;
+  }
+
+  .mobile-bottom-nav {
+    position: fixed !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 12px !important;
+    z-index: 2147483647 !important;
+    height: 72px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 8px 10px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    background: rgba(17, 17, 17, .96) !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.44) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+
+  .mobile-bottom-nav::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .mobile-bottom-nav a {
+    flex: 0 0 72px !important;
+    width: 72px !important;
+    height: 54px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    text-decoration: none !important;
+    text-align: center !important;
+    color: rgba(255,255,255,.78) !important;
+    background: rgba(255,255,255,.075) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    border-radius: 16px !important;
+  }
+
+  .mobile-bottom-nav a span {
+    font-size: 20px !important;
+    line-height: 1 !important;
+  }
+
+  .mobile-bottom-nav a small {
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+    font-weight: 700 !important;
+  }
+
+  .mobile-bottom-nav a.active,
+  .mobile-bottom-nav a:hover {
+    background: linear-gradient(135deg, var(--blue), var(--green)) !important;
+    color: white !important;
+    border-color: transparent !important;
+    transform: translateY(-2px) !important;
+  }
+}
+
+@media (min-width: 1251px) {
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+}

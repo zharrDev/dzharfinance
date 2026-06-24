@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../assets/mk.png" sizes="64x64">
+  <title>DzharFinance - Weather Detail</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="../css/weather.css">
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="dashboard-topbar">
+    <div class="logo">
+      <a href="../index.html" class="back-btn" aria-label="Kembali ke homepage">
+        <img src="../assets/arrow.png" alt="back">
+      </a>
+      <img src="../assets/logooo.png" alt="DzharFinance Logo" class="dashboard-logo">
+    </div>
+    <nav class="app-nav" aria-label="Navigasi halaman">
+      <a href="../index.html">Home</a>
+      <a href="dashboard.html">Finance</a>
+      <a href="reminder.html">Reminder</a>
+      <a href="jadwal.html">Jadwal</a>
+      <a href="weather.html" class="active">Weather</a>
+      <a href="news.html">News</a>
+    </nav>
+    <span class="topbar-badge">Weather Updates</span>
+  </header>
+
+  <nav class="mobile-bottom-nav" aria-label="Navigasi mobile">
+    <a href="../index.html"><span>🏠</span><small>Home</small></a>
+    <a href="dashboard.html"><span>💰</span><small>Finance</small></a>
+    <a href="reminder.html"><span>⏰</span><small>Reminder</small></a>
+    <a href="jadwal.html"><span>🗓️</span><small>Jadwal</small></a>
+    <a href="weather.html" class="active"><span>☁️</span><small>Weather</small></a>
+    <a href="news.html"><span>📰</span><small>News</small></a>
+  </nav>
+
+
+  <main class="weather-container">
+    <section class="weather-hero">
+      <span class="hero-badge">DzharFinance Weather</span>
+      <h1>Weather Updates</h1>
+      <p>Cek cuaca kota pilihanmu, lihat lokasi di peta, dan pantau ramalan suhu 5 hari ke depan.</p>
+    </section>
+
+    <form class="weather-search" id="weatherSearchForm">
+      <input type="text" id="cityInput" placeholder="Cari kota... contoh: Jakarta" autocomplete="off" />
+      <button id="searchCityBtn" type="submit">Cari Kota</button>
+    </form>
+
+    <section class="weather-main-card">
+      <div class="weather-info">
+        <p class="card-label">Current Weather</p>
+        <h2 id="city-name">Memuat...</h2>
+        <img id="weather-icon" alt="Weather icon">
+        <p id="temperature" class="temperature">--°C</p>
+        <p id="description" class="description">Mengambil data cuaca...</p>
+        <div class="weather-stats">
+          <p id="humidity">Kelembapan: --%</p>
+          <p id="wind">Angin: -- m/s</p>
+        </div>
+      </div>
+      <div id="map" class="map-box"></div>
+    </section>
+
+    <section class="bottom-section">
+      <div class="forecast-text">
+        <p class="card-label">Forecast</p>
+        <h2>Ramalan 5 Hari</h2>
+        <ul id="forecast-list"></ul>
+      </div>
+      <div class="forecast-chart">
+        <canvas id="forecastChart"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="social-apps">
+      <a href="https://www.instagram.com/dzhar.hrahap" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/ig.png" alt="Instagram" class="icon-app" />
+      </a>
+      <a href="https://wa.me/628123456789?text=Halo%20saya%20ingin%20bertanya" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/wa.png" alt="WhatsApp" class="icon-app" />
+      </a>
+      <a href="https://www.facebook.com/izhar.syafawi.harahap" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/fb.png" alt="Facebook" class="icon-app" />
+      </a>
+    </div>
+    <div class="copyright">
+      &copy; 2025 created by ican.
+    </div>
+  </footer>
+
+  <script src="../js/weather.js"></script>
+</body>
+</html>

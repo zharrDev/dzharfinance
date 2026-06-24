@@ -1,0 +1,1687 @@
+/* ============================
+   DZharFinance Reminder Page
+   Matching homepage colors, static clock-themed background, dark navbar, white cards,
+   blue (#078cd4), green (#05c227), yellow (#f7b801)
+============================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  --dark: #0d0d0d;
+  --topbar: #111;
+  --white: #ffffff;
+  --soft: #f8f9fa;
+  --text: #273442;
+  --muted: #667085;
+  --blue: #078cd4;
+  --green: #05c227;
+  --yellow: #f7b801;
+  --red: #e74c3c;
+  --line: rgba(255, 255, 255, 0.18);
+  --border: #e4e9f0;
+  --card-shadow: 0 14px 35px rgba(0, 0, 0, 0.18);
+  --soft-shadow: 0 7px 18px rgba(0, 0, 0, 0.10);
+}
+
+html {
+  min-width: 320px;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  background: var(--dark);
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Background statis tema waktu / jam */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(7, 140, 212, 0.34), transparent 28%),
+    radial-gradient(circle at 84% 18%, rgba(5, 194, 39, 0.18), transparent 25%),
+    linear-gradient(135deg, #07111f 0%, #0d0d0d 45%, #102033 100%);
+}
+
+/* Ornamen jam halus biar temanya Time Management, bukan slider homepage */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.55)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='700' viewBox='0 0 900 700'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.10)' stroke-width='3'%3E%3Ccircle cx='705' cy='165' r='108'/%3E%3Cpath d='M705 93v72l52 34' stroke-linecap='round'/%3E%3Ccircle cx='165' cy='530' r='86'/%3E%3Cpath d='M165 480v50l-38 30' stroke-linecap='round'/%3E%3C/g%3E%3Cg fill='rgba(255,255,255,0.08)'%3E%3Ccircle cx='705' cy='58' r='5'/%3E%3Ccircle cx='812' cy='165' r='5'/%3E%3Ccircle cx='705' cy='272' r='5'/%3E%3Ccircle cx='598' cy='165' r='5'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: min(900px, 115vw) auto;
+}
+
+/* ============================
+   TOPBAR
+============================ */
+.dashboard-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 32px;
+  background: rgba(17, 17, 17, 0.92);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 18px rgba(0,0,0,.25);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.dashboard-topbar a,
+.back-btn {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  transition: transform 0.25s ease, background 0.25s ease;
+  flex: 0 0 auto;
+}
+
+.dashboard-topbar a:hover,
+.back-btn:hover {
+  transform: translateX(-3px) scale(1.05);
+  background: rgba(255,255,255,.09);
+}
+
+.dashboard-topbar a img,
+.back-btn img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.dashboard-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+.weather {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.9rem;
+  background: rgba(255,255,255,.08);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 0;
+  transition: background .25s ease, transform .25s ease;
+  white-space: nowrap;
+}
+.weather:hover {
+  background: rgba(7,140,212,.25);
+  transform: translateY(-2px);
+}
+.weather-icon {
+  width: 26px;
+  height: 26px;
+}
+.weather-temp {
+  font-weight: 700;
+}
+.weather-city {
+  color: #ddd;
+}
+
+/* ============================
+   MAIN + INTRO
+============================ */
+main {
+  flex: 1;
+  width: 100%;
+  padding: 38px 20px 0;
+}
+
+.reminder-hero {
+  max-width: 1050px;
+  margin: 0 auto 26px;
+  color: white;
+  text-align: center;
+  padding: 18px 10px 4px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 14px;
+  margin-bottom: 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.12);
+  color: #e8f7ff;
+  border: 1px solid rgba(255,255,255,.16);
+  font-size: .85rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+
+.reminder-hero h1 {
+  font-size: clamp(2.1rem, 6vw, 4.2rem);
+  line-height: 1.08;
+  font-weight: 700;
+  text-shadow: 0 4px 18px rgba(0,0,0,.45);
+  margin-bottom: 10px;
+}
+.reminder-hero p {
+  color: #d6d6d6;
+  font-size: clamp(.95rem, 2.4vw, 1.12rem);
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.reminder-wrapper {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  align-items: start;
+  gap: 28px;
+  width: min(1050px, calc(100% - 32px));
+  margin: 0 auto 24px;
+}
+
+.card,
+#prompt-jadwal,
+#jadwal-berjalan {
+  background: rgba(255,255,255,0.96);
+  border-radius: 18px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255,255,255,.55);
+}
+
+.card {
+  padding: 24px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 42px rgba(0,0,0,.24);
+}
+
+.card-label {
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 5px;
+}
+
+.section-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.limit-badge {
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  background: #eef8ff;
+  border: 1px solid #d7eefb;
+  color: var(--blue);
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 700;
+}
+
+/* ============================
+   CARD JAM
+============================ */
+.card-clock {
+  text-align: center;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(135deg, #ffffff 0%, #eef8ff 100%);
+  position: relative;
+  overflow: hidden;
+}
+.card-clock::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--blue), var(--green));
+}
+.card-clock::after {
+  content: "TIME";
+  position: absolute;
+  right: -12px;
+  bottom: -10px;
+  font-size: 54px;
+  font-weight: 700;
+  color: rgba(7, 140, 212, .08);
+}
+.card-clock h2 {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(2.25rem, 6vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: var(--dark);
+  letter-spacing: 1px;
+}
+
+.progress-container-clock {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 250px;
+  margin: 0 auto;
+  font-weight: 600;
+  color: var(--muted);
+}
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background: #e9eef3;
+  border-radius: 999px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+.progress-container-clock #progressFillClock,
+#progressFill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--blue), var(--green));
+  border-radius: 999px;
+  transition: width 0.35s ease-in-out;
+}
+
+/* ============================
+   CARD REMINDER
+============================ */
+.card-reminder {
+  min-height: 260px;
+}
+.card-reminder h3,
+#jadwal-berjalan h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-list:empty::before {
+  content: "Belum ada reminder. Tekan tombol + untuk menambah kegiatan.";
+  display: block;
+  background: #f8f9fa;
+  color: var(--muted);
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px dashed #cfd8e3;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.task-list li {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+  background: var(--soft);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  border-left: 4px solid var(--blue);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+}
+.task-list li:hover {
+  transform: translateY(-2px);
+  background: #fff;
+  box-shadow: var(--soft-shadow);
+}
+.task-list span {
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+.task-list li.is-done span {
+  color: #98a2b3;
+  text-decoration: line-through;
+}
+.reminder-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--green);
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 7px 12px;
+  font-size: 13px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.edit-btn {
+  background: var(--yellow);
+  color: #111;
+}
+.delete-btn {
+  background: var(--red);
+  color: white;
+}
+.edit-btn:hover,
+.delete-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(.95);
+}
+
+/* Tombol floating tambah */
+.fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: none;
+  background: var(--green);
+  color: #111;
+  font-size: 30px;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(5,194,39,.32);
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+  z-index: 90;
+}
+.fab:hover {
+  background: white;
+  color: var(--dark);
+  transform: scale(1.08) rotate(90deg);
+}
+.fab.is-open {
+  transform: rotate(45deg) scale(.94);
+  background: #fff;
+  font-size: 24px;
+}
+
+/* ============================
+   POPUP FORM + CUSTOM MODAL
+============================ */
+.popup {
+  position: fixed;
+  bottom: 98px;
+  right: 28px;
+  width: 310px;
+  max-height: calc(100vh - 130px);
+  overflow-y: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 14px 35px rgba(0,0,0,0.24);
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 99;
+}
+.popup.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+.popup-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.popup-title h3 {
+  color: #111;
+  font-size: 1.05rem;
+}
+.close-popup {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 0;
+  background: #eef2f7;
+  color: #111;
+  font-size: 17px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+}
+.close-popup:hover {
+  background: #e2e8f0;
+}
+.popup form label {
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+.popup form input {
+  width: 100%;
+  padding: 11px 12px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  border: 1px solid #d0d7de;
+  outline: none;
+  transition: border .2s ease, box-shadow .2s ease;
+}
+.popup form input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(7,140,212,.16);
+}
+.popup form button,
+#prompt-jadwal button,
+.edit-jadwal-btn,
+.modal-actions button {
+  padding: 10px 18px;
+  background: linear-gradient(135deg, var(--blue), var(--green));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(7, 140, 212, .22);
+  transition: filter 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.popup form button {
+  width: 100%;
+}
+.popup form button:hover,
+#prompt-jadwal button:hover,
+.edit-jadwal-btn:hover,
+.modal-actions button:hover {
+  filter: brightness(1.06);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(5, 194, 39, .24);
+}
+
+/* Toast notification */
+.toast-container {
+  position: fixed;
+  top: 84px;
+  right: 24px;
+  z-index: 9999;
+  display: grid;
+  gap: 10px;
+  width: min(340px, calc(100% - 32px));
+}
+.toast {
+  background: rgba(255,255,255,.98);
+  color: var(--text);
+  border-left: 5px solid var(--blue);
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.22);
+  animation: toastIn .28s ease both;
+  line-height: 1.55;
+}
+.toast.success { border-left-color: var(--green); }
+.toast.warning { border-left-color: var(--yellow); }
+.toast.danger { border-left-color: var(--red); }
+.toast strong {
+  display: block;
+  color: #111;
+  margin-bottom: 2px;
+}
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Confirm modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,.62);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.modal-box {
+  width: min(380px, 100%);
+  background: white;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 18px 45px rgba(0,0,0,.35);
+  animation: modalIn .25s ease both;
+}
+.modal-box h4 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+  color: #111;
+}
+.modal-box p {
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+.modal-actions .cancel-btn {
+  background: #eef2f7;
+  color: #111;
+}
+.modal-actions .danger-btn {
+  background: var(--red);
+  color: white;
+}
+.modal-actions .danger-btn:hover {
+  background: #c0392b;
+  color: white;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(.96) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ============================
+   JADWAL MINGGUAN
+============================ */
+.hidden {
+  display: none !important;
+}
+
+#prompt-jadwal {
+  width: min(1050px, calc(100% - 32px));
+  margin: 20px auto;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+  border-left: 5px solid var(--yellow);
+}
+#prompt-jadwal p {
+  font-size: 15px;
+  margin: 0;
+  color: var(--text);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+#jadwal-berjalan {
+  width: min(1050px, calc(100% - 32px));
+  margin: 26px auto 20px;
+  padding: 22px;
+}
+
+#slider-jadwal {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 5px 2px 12px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+#slider-jadwal::-webkit-scrollbar {
+  height: 8px;
+}
+#slider-jadwal::-webkit-scrollbar-thumb {
+  background: var(--blue);
+  border-radius: 999px;
+}
+#slider-jadwal::-webkit-scrollbar-track {
+  background: #e9eef3;
+  border-radius: 999px;
+}
+
+.hari-box {
+  flex: 0 0 210px;
+  background: #f8f9fa;
+  border-radius: 14px;
+  padding: 15px;
+  border-top: 4px solid var(--blue);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hari-box:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--soft-shadow);
+}
+.hari-box h3 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.hari-box p,
+.hari-box small {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.edit-jadwal-btn {
+  margin-top: 16px;
+}
+
+/* ============================
+   FOOTER
+============================ */
+.app-footer {
+  background: #111;
+  color: #ccc;
+  padding: 15px 10px;
+  text-align: center;
+  border-top: 1px solid #333;
+  margin-top: 45px;
+}
+
+.social-apps {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 10px;
+}
+
+.icon-app {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+  filter: brightness(0) invert(1);
+}
+.icon-app:hover {
+  transform: scale(1.2);
+}
+.copyright {
+  font-size: 13px;
+  color: #777;
+}
+
+/* ============================
+   RESPONSIVE TABLET + SMARTPHONE
+============================ */
+@media (max-width: 850px) {
+  main {
+    padding: 30px 0 0;
+  }
+  .dashboard-topbar {
+    padding: 12px 16px;
+  }
+  .reminder-wrapper {
+    grid-template-columns: 1fr;
+    width: min(100% - 28px, 650px);
+    gap: 20px;
+  }
+  .card-clock,
+  .card-reminder {
+    width: 100%;
+    min-width: 0;
+  }
+  .card-clock {
+    min-height: 190px;
+  }
+  #prompt-jadwal,
+  #jadwal-berjalan {
+    width: min(100% - 28px, 650px);
+  }
+  #prompt-jadwal {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  main {
+    padding: 22px 0 0;
+  }
+  .dashboard-topbar {
+    gap: 8px;
+    padding: 10px 12px;
+  }
+  .dashboard-logo {
+    height: 32px;
+    max-width: 135px;
+  }
+  .dashboard-topbar a,
+  .back-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .dashboard-topbar a img,
+  .back-btn img {
+    width: 22px;
+    height: 22px;
+  }
+  .weather {
+    padding: 6px 8px;
+    font-size: .78rem;
+  }
+  .weather-icon {
+    width: 23px;
+    height: 23px;
+  }
+  .weather-city {
+    display: none;
+  }
+  .reminder-hero {
+    padding: 14px 18px 0;
+    margin-bottom: 18px;
+  }
+  .hero-badge {
+    font-size: .78rem;
+    padding: 6px 11px;
+  }
+  .reminder-hero h1 {
+    font-size: 2.25rem;
+  }
+  .reminder-hero p {
+    font-size: .92rem;
+  }
+  .reminder-wrapper {
+    width: calc(100% - 24px);
+    gap: 16px;
+  }
+  .card {
+    padding: 17px;
+    border-radius: 16px;
+  }
+  .card-clock {
+    min-height: 170px;
+  }
+  .card-clock h2 {
+    font-size: 2.25rem;
+    margin-bottom: 14px;
+  }
+  .section-title-row {
+    gap: 10px;
+  }
+  .card-reminder h3,
+  #jadwal-berjalan h3 {
+    font-size: 18px;
+  }
+  .limit-badge {
+    font-size: .72rem;
+    padding: 5px 8px;
+  }
+  .task-list li {
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    padding: 13px;
+  }
+  .task-list span {
+    grid-column: 2 / 3;
+    font-size: 14px;
+  }
+  .edit-btn,
+  .delete-btn {
+    width: 100%;
+    margin-top: 4px;
+  }
+  .edit-btn {
+    grid-column: 1 / 2;
+  }
+  .delete-btn {
+    grid-column: 2 / 3;
+  }
+  .popup {
+    width: calc(100% - 28px);
+    right: 14px;
+    left: 14px;
+    bottom: 88px;
+    padding: 18px;
+  }
+  .fab {
+    right: 18px;
+    bottom: 18px;
+    width: 54px;
+    height: 54px;
+    font-size: 28px;
+  }
+  #prompt-jadwal {
+    width: calc(100% - 24px);
+    padding: 16px;
+  }
+  #prompt-jadwal p {
+    font-size: 14px;
+  }
+  #jadwal-berjalan {
+    width: calc(100% - 24px);
+    padding: 17px;
+  }
+  #slider-jadwal {
+    gap: 12px;
+  }
+  .hari-box {
+    flex-basis: 82vw;
+  }
+  .toast-container {
+    top: 68px;
+    right: 12px;
+    width: calc(100% - 24px);
+  }
+  .modal-box {
+    padding: 20px;
+  }
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+  .modal-actions button {
+    width: 100%;
+  }
+  .app-footer {
+    margin-top: 35px;
+  }
+}
+
+
+/* ============================
+   SHARED HEADER NAVIGATION
+============================ */
+.app-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.app-nav::-webkit-scrollbar { display: none; }
+.app-nav a {
+  color: rgba(255,255,255,.82);
+  text-decoration: none;
+  padding: 8px 11px;
+  border-radius: 999px;
+  font-size: .86rem;
+  font-weight: 700;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  transition: background .22s ease, color .22s ease, transform .22s ease, border-color .22s ease;
+}
+.app-nav a:hover,
+.app-nav a.active {
+  color: #fff;
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.14);
+  transform: translateY(-1px);
+}
+.dashboard-topbar .topbar-badge,
+.dashboard-topbar .weather {
+  margin-left: 6px;
+  flex: 0 0 auto;
+}
+@media (max-width: 900px) {
+  .dashboard-topbar { flex-wrap: wrap; }
+  .app-nav {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+    padding-top: 2px;
+  }
+  .app-nav a {
+    font-size: .78rem;
+    padding: 7px 9px;
+  }
+}
+@media (max-width: 560px) {
+  .app-nav { gap: 6px; }
+  .app-nav a { font-size: .74rem; padding: 7px 8px; }
+}
+
+
+/* ============================
+   MOBILE BOTTOM SLIDE NAV
+   Muncul di bawah layar saat mode HP, bisa digeser horizontal.
+============================ */
+@media (max-width: 700px) {
+  body {
+    padding-bottom: 86px;
+  }
+
+  .dashboard-topbar {
+    flex-wrap: nowrap;
+  }
+
+  .dashboard-topbar .app-nav {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: 12px;
+    z-index: 3000;
+    width: auto;
+    max-width: none;
+    margin: 0;
+    order: initial;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    background: rgba(17, 17, 17, 0.92);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 22px;
+    box-shadow: 0 14px 34px rgba(0,0,0,.35);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .dashboard-topbar .app-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dashboard-topbar .app-nav a {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    min-width: 76px;
+    padding: 10px 12px;
+    text-align: center;
+    font-size: .76rem;
+    border-radius: 16px;
+    background: rgba(255,255,255,.075);
+    border: 1px solid rgba(255,255,255,.08);
+  }
+
+  .dashboard-topbar .app-nav a:hover,
+  .dashboard-topbar .app-nav a.active {
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    color: #fff;
+    border-color: transparent;
+    transform: translateY(-1px);
+  }
+
+  .dashboard-topbar .topbar-badge {
+    display: none;
+  }
+
+  .dashboard-topbar .weather {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 380px) {
+  .dashboard-topbar .app-nav a {
+    min-width: 70px;
+    font-size: .72rem;
+    padding: 9px 10px;
+  }
+}
+
+
+/* =====================================================
+   FINAL FIX - HEADER DESKTOP + BOTTOM ICON NAV MOBILE
+   Desktop: header rapi.
+   Mobile/HP: menu pindah ke bawah sebagai icon dock.
+===================================================== */
+.dashboard-topbar {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center !important;
+  gap: 14px !important;
+}
+.dashboard-topbar .logo {
+  min-width: 0;
+}
+.dashboard-topbar .app-nav {
+  justify-self: center;
+  margin-left: 0 !important;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.dashboard-topbar .app-nav::-webkit-scrollbar { display: none; }
+.dashboard-topbar .app-nav a {
+  text-decoration: none;
+}
+.dashboard-topbar .topbar-badge,
+.dashboard-topbar .weather {
+  justify-self: end;
+}
+@media (max-width: 1120px) {
+  .dashboard-topbar .topbar-badge { display: none !important; }
+}
+@media (max-width: 900px) {
+  body { padding-bottom: 94px !important; }
+
+  .dashboard-topbar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    min-height: 58px;
+  }
+
+  /* Nav tidak lagi berada di header, tapi fixed di bawah */
+  .dashboard-topbar .app-nav {
+    position: fixed !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 12px !important;
+    top: auto !important;
+    z-index: 99999 !important;
+    width: auto !important;
+    max-width: none !important;
+    height: 70px !important;
+    margin: 0 !important;
+    padding: 8px 10px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    background: rgba(17, 17, 17, 0.94) !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.40) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+  .dashboard-topbar .app-nav::-webkit-scrollbar { display: none; }
+
+  .dashboard-topbar .app-nav a {
+    flex: 0 0 72px !important;
+    width: 72px !important;
+    height: 54px !important;
+    min-width: 72px !important;
+    padding: 7px 6px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    scroll-snap-align: center;
+    text-align: center !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    color: rgba(255,255,255,.78) !important;
+    background: rgba(255,255,255,.075) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    border-radius: 16px !important;
+    transform: none !important;
+  }
+  .dashboard-topbar .app-nav a::before {
+    display: block;
+    font-size: 20px;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .dashboard-topbar .app-nav a::after {
+    display: block;
+    font-size: 10px;
+    line-height: 1.1;
+    font-weight: 700;
+    color: inherit;
+  }
+  .dashboard-topbar .app-nav a:nth-child(1)::before { content: "🏠"; }
+  .dashboard-topbar .app-nav a:nth-child(1)::after { content: "Home"; }
+  .dashboard-topbar .app-nav a:nth-child(2)::before { content: "💰"; }
+  .dashboard-topbar .app-nav a:nth-child(2)::after { content: "Finance"; }
+  .dashboard-topbar .app-nav a:nth-child(3)::before { content: "⏰"; }
+  .dashboard-topbar .app-nav a:nth-child(3)::after { content: "Reminder"; }
+  .dashboard-topbar .app-nav a:nth-child(4)::before { content: "🗓️"; }
+  .dashboard-topbar .app-nav a:nth-child(4)::after { content: "Jadwal"; }
+  .dashboard-topbar .app-nav a:nth-child(5)::before { content: "☁️"; }
+  .dashboard-topbar .app-nav a:nth-child(5)::after { content: "Weather"; }
+  .dashboard-topbar .app-nav a:nth-child(6)::before { content: "📰"; }
+  .dashboard-topbar .app-nav a:nth-child(6)::after { content: "News"; }
+
+  .dashboard-topbar .app-nav a:hover,
+  .dashboard-topbar .app-nav a.active {
+    background: linear-gradient(135deg, var(--blue), var(--green)) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+    transform: translateY(-2px) !important;
+  }
+
+  .dashboard-topbar .topbar-badge { display: none !important; }
+  .dashboard-topbar .weather {
+    margin-left: auto !important;
+    max-width: 132px;
+    overflow: hidden;
+  }
+}
+@media (max-width: 390px) {
+  .dashboard-topbar .app-nav a {
+    flex-basis: 66px !important;
+    width: 66px !important;
+    min-width: 66px !important;
+  }
+  .dashboard-topbar .app-nav a::after { font-size: 9px; }
+}
+
+
+/* =====================================================
+   HEADER NAV FINAL CLEAN FIX
+   Desktop: header rapi, menu teks kecil.
+   Mobile/HP: menu jadi dock icon di bawah, bisa digeser.
+===================================================== */
+@media (min-width: 769px) {
+  .dashboard-topbar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    min-height: 68px !important;
+    padding: 12px 28px !important;
+  }
+
+  .dashboard-topbar .logo {
+    flex: 0 0 auto !important;
+    min-width: 170px !important;
+  }
+
+  .dashboard-topbar .dashboard-logo {
+    height: 44px !important;
+    max-width: 170px !important;
+    object-fit: contain !important;
+  }
+
+  .dashboard-topbar .app-nav {
+    position: static !important;
+    inset: auto !important;
+    order: initial !important;
+    z-index: auto !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: none !important;
+    flex: 1 1 auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    overflow: visible !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .dashboard-topbar .app-nav a {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: auto !important;
+    padding: 8px 11px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: .84rem !important;
+    line-height: 1 !important;
+    font-weight: 700 !important;
+    color: rgba(255,255,255,.82) !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: 999px !important;
+    transform: none !important;
+  }
+
+  .dashboard-topbar .app-nav a::before,
+  .dashboard-topbar .app-nav a::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  .dashboard-topbar .app-nav a:hover,
+  .dashboard-topbar .app-nav a.active {
+    color: #fff !important;
+    background: rgba(255,255,255,.13) !important;
+    border-color: rgba(255,255,255,.16) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  .dashboard-topbar .topbar-badge,
+  .dashboard-topbar .weather {
+    flex: 0 0 auto !important;
+    margin-left: 0 !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1250px) {
+  .dashboard-topbar .logo { min-width: 145px !important; }
+  .dashboard-topbar .dashboard-logo { max-width: 145px !important; }
+  .dashboard-topbar .app-nav { justify-content: flex-end !important; gap: 4px !important; }
+  .dashboard-topbar .app-nav a { padding: 7px 8px !important; font-size: .78rem !important; }
+  .dashboard-topbar .topbar-badge { display: none !important; }
+}
+
+@media (max-width: 768px) {
+  body { padding-bottom: 96px !important; }
+
+  .dashboard-topbar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    min-height: 58px !important;
+    padding: 10px 12px !important;
+  }
+
+  .dashboard-topbar .logo {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .dashboard-topbar .dashboard-logo {
+    height: 32px !important;
+    max-width: 138px !important;
+    object-fit: contain !important;
+  }
+
+  .dashboard-topbar .topbar-badge { display: none !important; }
+
+  .dashboard-topbar .app-nav {
+    position: fixed !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 12px !important;
+    top: auto !important;
+    z-index: 99999 !important;
+    width: auto !important;
+    max-width: none !important;
+    height: 70px !important;
+    margin: 0 !important;
+    padding: 8px 10px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x proximity !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    background: rgba(17,17,17,.95) !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.42) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+
+  .dashboard-topbar .app-nav::-webkit-scrollbar { display: none !important; }
+
+  .dashboard-topbar .app-nav a {
+    flex: 0 0 72px !important;
+    width: 72px !important;
+    min-width: 72px !important;
+    height: 54px !important;
+    padding: 7px 6px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    text-align: center !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    color: rgba(255,255,255,.78) !important;
+    text-decoration: none !important;
+    background: rgba(255,255,255,.075) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    border-radius: 16px !important;
+    transform: none !important;
+    scroll-snap-align: center !important;
+  }
+
+  .dashboard-topbar .app-nav a::before {
+    display: block !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+    margin-bottom: 2px !important;
+  }
+
+  .dashboard-topbar .app-nav a::after {
+    display: block !important;
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+    font-weight: 700 !important;
+    color: inherit !important;
+  }
+
+  .dashboard-topbar .app-nav a:nth-child(1)::before { content: "🏠" !important; }
+  .dashboard-topbar .app-nav a:nth-child(1)::after { content: "Home" !important; }
+  .dashboard-topbar .app-nav a:nth-child(2)::before { content: "💰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(2)::after { content: "Finance" !important; }
+  .dashboard-topbar .app-nav a:nth-child(3)::before { content: "⏰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(3)::after { content: "Reminder" !important; }
+  .dashboard-topbar .app-nav a:nth-child(4)::before { content: "🗓️" !important; }
+  .dashboard-topbar .app-nav a:nth-child(4)::after { content: "Jadwal" !important; }
+  .dashboard-topbar .app-nav a:nth-child(5)::before { content: "☁️" !important; }
+  .dashboard-topbar .app-nav a:nth-child(5)::after { content: "Weather" !important; }
+  .dashboard-topbar .app-nav a:nth-child(6)::before { content: "📰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(6)::after { content: "News" !important; }
+
+  .dashboard-topbar .app-nav a:hover,
+  .dashboard-topbar .app-nav a.active {
+    background: linear-gradient(135deg, var(--blue), var(--green)) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+    transform: translateY(-2px) !important;
+  }
+
+  .dashboard-topbar .weather {
+    flex: 0 0 auto !important;
+    margin-left: 0 !important;
+    max-width: 126px !important;
+    overflow: hidden !important;
+  }
+}
+
+
+/* =====================================================
+   ABSOLUTE FINAL: BOTTOM ICON NAV FOR SMALL/DIVIDED SCREEN
+   Dipakai sampai 1250px supaya saat DevTools dibuka / layar HP,
+   menu tidak numpuk di header dan pasti turun ke bawah.
+===================================================== */
+@media (max-width: 1250px) {
+  body { padding-bottom: 96px !important; }
+
+  .dashboard-topbar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    min-height: 58px !important;
+    padding: 10px 12px !important;
+    overflow: visible !important;
+  }
+
+  .dashboard-topbar .logo {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .dashboard-topbar .dashboard-logo {
+    height: 34px !important;
+    max-width: 150px !important;
+    object-fit: contain !important;
+  }
+
+  .dashboard-topbar .topbar-badge { display: none !important; }
+
+  .dashboard-topbar .app-nav {
+    position: fixed !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 12px !important;
+    top: auto !important;
+    z-index: 2147483647 !important;
+    width: auto !important;
+    max-width: none !important;
+    height: 70px !important;
+    margin: 0 !important;
+    padding: 8px 10px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x proximity !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    background: rgba(17,17,17,.96) !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.44) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+
+  .dashboard-topbar .app-nav::-webkit-scrollbar { display: none !important; }
+
+  .dashboard-topbar .app-nav a {
+    flex: 0 0 72px !important;
+    width: 72px !important;
+    min-width: 72px !important;
+    height: 54px !important;
+    padding: 7px 6px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    text-align: center !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    color: rgba(255,255,255,.78) !important;
+    text-decoration: none !important;
+    background: rgba(255,255,255,.075) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    border-radius: 16px !important;
+    transform: none !important;
+    scroll-snap-align: center !important;
+  }
+
+  .dashboard-topbar .app-nav a::before {
+    display: block !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+    margin-bottom: 2px !important;
+  }
+  .dashboard-topbar .app-nav a::after {
+    display: block !important;
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+    font-weight: 700 !important;
+    color: inherit !important;
+  }
+
+  .dashboard-topbar .app-nav a:nth-child(1)::before { content: "🏠" !important; }
+  .dashboard-topbar .app-nav a:nth-child(1)::after { content: "Home" !important; }
+  .dashboard-topbar .app-nav a:nth-child(2)::before { content: "💰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(2)::after { content: "Finance" !important; }
+  .dashboard-topbar .app-nav a:nth-child(3)::before { content: "⏰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(3)::after { content: "Reminder" !important; }
+  .dashboard-topbar .app-nav a:nth-child(4)::before { content: "🗓️" !important; }
+  .dashboard-topbar .app-nav a:nth-child(4)::after { content: "Jadwal" !important; }
+  .dashboard-topbar .app-nav a:nth-child(5)::before { content: "☁️" !important; }
+  .dashboard-topbar .app-nav a:nth-child(5)::after { content: "Weather" !important; }
+  .dashboard-topbar .app-nav a:nth-child(6)::before { content: "📰" !important; }
+  .dashboard-topbar .app-nav a:nth-child(6)::after { content: "News" !important; }
+
+  .dashboard-topbar .app-nav a:hover,
+  .dashboard-topbar .app-nav a.active {
+    background: linear-gradient(135deg, var(--blue), var(--green)) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+    transform: translateY(-2px) !important;
+  }
+}
+
+@media (min-width: 1251px) {
+  body { padding-bottom: 0 !important; }
+  .dashboard-topbar .app-nav a::before,
+  .dashboard-topbar .app-nav a::after {
+    content: none !important;
+    display: none !important;
+  }
+}
+
+
+/* =====================================================
+   REAL MOBILE BOTTOM NAV FIX
+   Ini nav terpisah di luar header. Di HP nav header disembunyikan,
+   yang muncul cuma dock bawah, jadi tidak mungkin numpuk di header.
+===================================================== */
+.mobile-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 1250px) {
+  body {
+    padding-bottom: 98px !important;
+  }
+
+  /* Hilangkan menu yang ada di header saat layar kecil */
+  .dashboard-topbar .app-nav {
+    display: none !important;
+  }
+
+  .dashboard-topbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    min-height: 58px !important;
+    padding: 10px 12px !important;
+    overflow: visible !important;
+  }
+
+  .dashboard-topbar .topbar-badge {
+    display: none !important;
+  }
+
+  .dashboard-topbar .dashboard-logo {
+    height: 34px !important;
+    max-width: 150px !important;
+    object-fit: contain !important;
+  }
+
+  .mobile-bottom-nav {
+    position: fixed !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 12px !important;
+    z-index: 2147483647 !important;
+    height: 72px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 8px 10px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    background: rgba(17, 17, 17, .96) !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.44) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+
+  .mobile-bottom-nav::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .mobile-bottom-nav a {
+    flex: 0 0 72px !important;
+    width: 72px !important;
+    height: 54px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    text-decoration: none !important;
+    text-align: center !important;
+    color: rgba(255,255,255,.78) !important;
+    background: rgba(255,255,255,.075) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    border-radius: 16px !important;
+  }
+
+  .mobile-bottom-nav a span {
+    font-size: 20px !important;
+    line-height: 1 !important;
+  }
+
+  .mobile-bottom-nav a small {
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+    font-weight: 700 !important;
+  }
+
+  .mobile-bottom-nav a.active,
+  .mobile-bottom-nav a:hover {
+    background: linear-gradient(135deg, var(--blue), var(--green)) !important;
+    color: white !important;
+    border-color: transparent !important;
+    transform: translateY(-2px) !important;
+  }
+}
+
+@media (min-width: 1251px) {
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+}

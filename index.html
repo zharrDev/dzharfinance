@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" type="png" href="assets/mk.png" sizes="64x64">
+    <title>DzharFinance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="language-select">
+      <label for="language" id="choose">Choose your language</label>
+        <select id="languageSelector">
+            <option value="English">English</option>
+            <option value="Indonesia">Indonesia</option>
+        </select>
+      </div>
+      <nav class="nav-links" id="navLinks">
+        <a href="#heroSection" id="home">Home</a>
+        <a href="#scroll" id="fiturr">Features</a>
+        <a href="#can" id="aboutt">About</a>
+        <a href="#apps" id="contact">Contact</a>
+        <a href="html/register.html" class="sign-in" id="btnSignIn">Sign-up</a>
+      </nav>
+      <div class="burger" id="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+    </header>
+
+  <section id="heroSection" class="hero" >
+    <div class="overlay"></div>
+      <div  class="hero-content">
+        <figure>
+          <img src="assets/logooo.png" alt="logo">
+          <figcaption class="tagline" id="subText">Smart way to manage your money, time, and news</figcaption>
+        </figure>
+        <a href="html/login.html" class="btn-link" id="btnLink">Get Started Today</a>
+      </div>
+  </section>
+
+  <section id="whyChoose" class="login-hidden hidden" >
+    <div class="content">
+      <div class="why-container">
+        <div class="why-left">
+          <h2 id="whyText">Why Choose DzharFinance?</h2>
+          <p id="contentText">
+            Empower your financial decisions with <b>DzharFinance</b> — the smart solution for managing your money, time, and staying updated with the latest news.
+            <br>
+            Our innovative platform integrates accounting tools with real-time news updates and time management features, ensuring you have everything you need at your fingertips.
+            <br>
+            Whether you're an individual or a business owner, our tailored services help you simplify your financial life and make informed decisions with confidence.
+          </p>
+        </div>
+        <div class="why-right">
+         <video autoplay muted loop playsinline>
+          <source src="assets/hihi.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+        </video>
+      </div>
+      </div>
+
+      <h1 id="scroll"></h1>
+      <h2 class="textfitur" id="fitur">Feature</h2>
+       <div class="features">
+        <div class="feature-card">
+          <span class="material-symbols-outlined">savings</span>
+          <a id="a" href="html/dashboard.html"><h3>Manage Finances</h3></a>
+          <p id="b">Record your expenses and income for better control.</p>
+        </div>
+        <div class="feature-card">
+          <span class="material-symbols-outlined">schedule</span>
+          <a id="c" href="html/reminder.html"><h3>Time Management</h3></a>
+          <p id="d">Manage your daily schedule and routines with ease.</p>
+        </div>
+        <div class="feature-card">
+          <span class="material-symbols-outlined">cloud</span>
+          <a id="e" href="html/weather.html"><h3>Weather Updates</h3></a>
+          <p id="f">See daily weather forecasts directly from your dashboard.</p>
+        </div>
+        <div class="feature-card">
+          <span class="material-symbols-outlined">newspaper</span>
+          <a id="g" href="html/news.html"><h3>Latest News</h3></a>
+          <p id="h">Get relevant, up-to-date news every day.</p>
+        </div>
+      </div>
+  
+      <div id="About" class="login-hidden hidden">
+        <div class="about-container">
+          <div class="about-img">
+            <img src="assets/seiha.png" alt="About DzharFinance" />
+          </div>
+          <div class="about-text">
+            <h2 id="can">About</h2>
+            <p id="aboutText">
+              <b>DzharFinance</b> was created for you who want a more organized and efficient life.<br>
+              Here, you can record expenses, manage your schedule, and even see the latest weather and news updates — all in one simple web app with a cool look.<br>
+              It's perfect for students, university students, freelancers, or anyone who wants a more structured life. Let's start managing your life with <b>DzharFinance</b>!
+            </p>
+          </div>
+        </div>
+
+      <button id="logoutBtn" class="hidden">Logout</button>
+      </div>
+    </div>
+  </section>
+
+
+<footer class="app-footer">
+  <div class="social-apps" id="apps">
+    <a href="https://www.instagram.com/dzhar.hrahap" target="_blank">
+      <img src="assets/ig.png" alt="Instagram" class="icon-app" />
+    </a>
+    <a href="https://wa.me/628123456789?text=Halo%20saya%20ingin%20bertanya" target="_blank">
+      <img src="assets/wa.png" alt="WhatsApp" class="icon-app" />
+    </a>
+    <a href="https://www.facebook.com/izhar.syafawi.harahap" target="_blank">
+      <img src="assets/fb.png" alt="Facebook" class="icon-app" />
+    </a>
+  </div>
+  <div class="copyright">
+    &copy; 2025 created by ican.
+  </div>
+</footer>
+
+  <!-- Loading Screen -->
+  <div id="loadingScreen" class="loading-screen hidden">
+    <video id="loadingVideo" autoplay muted>
+      <source src="assets/vvid.mp4" type="video/mp4" />
+    </video>
+    <span class="loading-text">Loading...</span>
+  </div>
+  <script src="js/script.js"></script>
+
+</body>
+</html>

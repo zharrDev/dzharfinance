@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../assets/mk.png" sizes="64x64">
+  <title>DzharFinance - Time Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/reminder.css" />
+</head>
+<body>
+  <header class="dashboard-topbar">
+    <div class="logo">
+      <a href="../index.html" class="back-btn" aria-label="Kembali ke homepage">
+        <img src="../assets/arrow.png" alt="back">
+      </a>
+      <img src="../assets/logooo.png" alt="DzharFinance Logo" class="dashboard-logo">
+    </div>
+
+    <nav class="app-nav" aria-label="Navigasi halaman">
+      <a href="../index.html">Home</a>
+      <a href="dashboard.html">Finance</a>
+      <a href="reminder.html" class="active">Reminder</a>
+      <a href="jadwal.html">Jadwal</a>
+      <a href="weather.html">Weather</a>
+      <a href="news.html">News</a>
+    </nav>
+
+    <button type="button" class="weather" aria-label="Buka halaman cuaca">
+      <img id="weather-icon" class="weather-icon" alt="Weather Icon">
+      <span id="weather-temp" class="weather-temp">--°C</span>
+      <span id="weather-city" class="weather-city">Loading</span>
+    </button>
+  </header>
+
+  <nav class="mobile-bottom-nav" aria-label="Navigasi mobile">
+    <a href="../index.html"><span>🏠</span><small>Home</small></a>
+    <a href="dashboard.html"><span>💰</span><small>Finance</small></a>
+    <a href="reminder.html" class="active"><span>⏰</span><small>Reminder</small></a>
+    <a href="jadwal.html"><span>🗓️</span><small>Jadwal</small></a>
+    <a href="weather.html"><span>☁️</span><small>Weather</small></a>
+    <a href="news.html"><span>📰</span><small>News</small></a>
+  </nav>
+
+
+  <main>
+    <section class="reminder-hero">
+      <span class="hero-badge">DzharFinance Reminder</span>
+      <h1>Time Management</h1>
+      <p>Atur kegiatan harian, pantau progress, dan lihat jadwal mingguanmu dalam tampilan yang rapi, smooth, dan matching dengan homepage.</p>
+    </section>
+
+    <section class="reminder-wrapper" aria-label="Reminder harian">
+      <div class="card card-clock">
+        <p class="card-label">Waktu Saat Ini</p>
+        <h2 id="clock">00:00:00</h2>
+        <div class="progress-container-clock">
+          <span id="doneCount">0</span>/<span id="totalCount">0</span> selesai
+          <div class="progress-bar" aria-label="Progress reminder">
+            <div id="progressFillClock"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-reminder">
+        <div class="section-title-row">
+          <div>
+            <p class="card-label">Daily Tasks</p>
+            <h3>📋 Daftar Reminder</h3>
+          </div>
+          <span class="limit-badge">Max 5</span>
+        </div>
+        <ul id="reminderList" class="task-list"></ul>
+      </div>
+    </section>
+
+    <div id="formPopup" class="popup hidden" aria-hidden="true">
+      <form id="scheduleForm">
+        <div class="popup-title">
+          <h3 id="popupTitle">Tambah Reminder</h3>
+          <button type="button" id="closePopup" class="close-popup" aria-label="Tutup form">×</button>
+        </div>
+
+        <label for="taskName">Nama Kegiatan</label>
+        <input type="text" id="taskName" placeholder="Contoh: Belajar, olahraga..." required>
+
+        <label for="taskTime">Jam</label>
+        <input type="time" id="taskTime" required>
+
+        <button type="submit" id="submitBtn">Simpan Reminder</button>
+      </form>
+    </div>
+
+    <button id="fab" class="fab" type="button" aria-label="Tambah reminder">+</button>
+
+    <section id="prompt-jadwal" class="jadwal-prompt">
+      <p>📅 Ayo buat jadwalmu, agar lebih konsisten terhadap waktu!</p>
+      <button type="button" onclick="window.location.href='jadwal.html'">Buat Jadwal</button>
+    </section>
+
+    <section id="jadwal-berjalan" class="hidden" aria-label="Jadwal mingguan">
+      <div class="section-title-row">
+        <div>
+          <p class="card-label">Weekly Plan</p>
+          <h3>📆 Jadwal Mingguan</h3>
+        </div>
+      </div>
+      <div id="slider-jadwal"></div>
+      <button type="button" onclick="window.location.href='jadwal.html'" id="editJadwalBtn" class="edit-jadwal-btn">Edit Jadwal</button>
+    </section>
+
+    <div class="jadwal-container" id="jadwalContainer"></div>
+  </main>
+
+  <footer class="app-footer">
+    <div class="social-apps">
+      <a href="https://www.instagram.com/dzhar.hrahap" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/ig.png" alt="Instagram" class="icon-app" />
+      </a>
+      <a href="https://wa.me/628123456789?text=Halo%20saya%20ingin%20bertanya" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/wa.png" alt="WhatsApp" class="icon-app" />
+      </a>
+      <a href="https://www.facebook.com/izhar.syafawi.harahap" target="_blank" rel="noopener noreferrer">
+        <img src="../assets/fb.png" alt="Facebook" class="icon-app" />
+      </a>
+    </div>
+    <div class="copyright">
+      &copy; 2025 created by ican.
+    </div>
+  </footer>
+
+  <script src="../js/reminder.js"></script>
+</body>
+</html>

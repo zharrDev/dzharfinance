@@ -1,0 +1,1144 @@
+/* ============================
+   RESET DAN DASAR
+============================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth; /* Halus saat scroll */
+}
+
+body {
+  background: #0d0d0d; /* Latar belakang gelap */
+  color: #fff;         /* Warna teks default putih */
+  overflow-x: hidden;  /* Hilangkan scroll horizontal */
+}
+
+/* Margin bawah khusus id tertentu */
+#scroll {
+  margin-bottom: 60px;
+}
+
+/* ============================
+   BAGIAN CONTENT DAN ABOUT
+============================ */
+.content, .about {
+  background-color: #ffffff;
+  padding: 30px 20px;
+  text-align: center;
+  border: #0d0d0d;
+}
+
+.content h2, .about h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.content p, .about p {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #444;
+}
+
+.textfitur {
+  margin: 40px;
+}
+
+.why-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  padding: 60px 20px;
+  flex-wrap: wrap;
+}
+
+.why-left {
+  flex: 1 1 55%;
+}
+
+.why-right {
+  flex: 1 1 40%;
+  text-align: center;
+}
+
+.why-right video {
+  max-width: 80%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 60px 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.about-img {
+  flex: 1 1 40%;
+  text-align: center;
+}
+
+.about-img img {
+  max-width: 70%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.about-text {
+  flex: 1 1 55%;
+  max-width: 600px;
+}
+
+.about-text h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+#aboutText {
+  line-height: 1.6;
+  font-size: 1rem;
+  color: #333;
+  text-align: left;
+}
+
+
+
+@media (max-width: 768px) {
+  .why-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .why-left, .why-right {
+    flex: 1 1 100%;
+  }
+}
+
+
+/* ============================
+   FITUR (GRID CARD)
+============================ */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.feature-card {
+  background-color: #f9f9f9;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px); /* Efek melayang */
+}
+
+.feature-card .material-symbols-outlined {
+  font-size: 40px;
+  color: #f7b801;
+  margin-bottom: 10px;
+}
+
+.feature-card h3,.feature-card a {
+  font-size: 20px;
+  margin: 10px 0 5px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.feature-card p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* ============================
+   ABOUT SECTION
+============================ */
+.about-section p {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 16px;
+  color: #444;
+  line-height: 1.8;
+}
+
+/* ============================
+   TOPBAR & NAVIGASI
+============================ */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  align-items: center;
+  background: #111;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+#languageSelector{
+  border-radius: 5px;
+  padding: 5px;
+  background-color: white;
+}
+
+.language-select label{
+  color: #078cd4;
+}
+
+.nav-links{
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a {
+  position: relative;
+  text-decoration: none;
+  color: white;
+  margin: 0 1rem;
+  padding-bottom: 5px;
+  transition: color 0.3s ease;
+  font-weight: 500;
+  font-size: medium;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: white;
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s ease;
+  
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  color: #078cd4;
+}
+
+
+
+/* ============================
+   FOOTER
+============================ */
+.app-footer {
+  background-color: #111;
+  color: #ccc;
+  padding: 15px 10px;
+  text-align: center;
+  border-top: 1px solid #333;
+}
+
+.social-apps {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 10px;
+}
+
+.icon-app {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+  filter: brightness(0) invert(1);
+}
+
+.icon-app:hover {
+  transform: scale(1.2);
+}
+
+.app-footer .copyright {
+  font-size: 13px;
+  color: #777;
+}
+
+/* ============================
+   HERO SECTION
+============================ */
+.hero {
+  position: relative;
+  height: 100vh;
+  transition: background-image 1s ease-in-out;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  flex-direction: column;
+  padding: 80px 20px;
+}
+
+.hero .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); 
+  z-index: 1;
+}
+
+.hero h1,
+.hero h2,
+.hero p {
+  z-index: 2;
+  position: relative;
+  color: white;
+}
+
+.hero img {
+  height: auto;
+  width: 100%;
+  max-width: 500px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+}
+
+.hero h1 {
+  font-size: 5rem;
+  font-weight: bold;
+}
+
+.tagline {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  color: #ccc;
+}
+
+/* ============================
+   TOMBOL (BUTTON)
+============================ */
+.btn-link {
+  display: inline-block;
+  background-color: white;
+  color: black;
+  border-radius: 20px;
+  padding: 12px 24px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+  width: 200px;
+  align-content: center;
+  margin: 20px auto;
+}
+
+.btn-link:hover {
+  background-color: #05c227;
+  color: #000;
+  transform: translateY(-2px);
+}
+
+
+button {
+  background-color: #c73934; /* Merah */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #4bb450; /* Hijau */
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* ============================
+   BURGER MENU (MOBILE)
+============================ */
+.burger {
+  display: none;
+  cursor: pointer;
+}
+
+.burger div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+/* ============================
+   LOADING SCREEN
+============================ */
+.loading-screen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.loading-screen video {
+  width: 99%;
+  max-height: 100vh;
+  object-fit: cover;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.loading-text {
+  position: absolute;
+  bottom: 30px; /* posisinya di bawah video */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  color: white;
+  text-shadow: 0 0 5px rgba(0,0,0,0.7);
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+
+/* ============================
+   RESPONSIVE
+============================ */
+@media screen and (max-width: 768px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .nav-links a {
+    margin: 0.5rem 0;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .tagline {
+    font-size: 1rem;
+  }
+
+  .btn-link {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-links {
+    margin-top: 1rem;
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 75%;
+    background-color: #111;
+    flex-direction: column;
+    width: 150px;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    z-index: 999;
+    align-items: center;
+  }
+
+  .nav-links.active {
+    transform: translateX(0);
+    display: flex;
+  }
+
+  .burger {
+    display: block;
+  }
+
+  .why-container {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* =====================================================
+   FINAL HOMEPAGE RESPONSIVE FIX
+   Mobile: background slider tidak ke-crop parah, konten mengecil,
+   feature card compact, section lain lebih enak di HP.
+===================================================== */
+img, video { max-width: 100%; height: auto; }
+
+/* Desktop polish agar tetap rapi */
+.hero {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-content {
+  width: min(920px, 100%);
+}
+
+.features {
+  padding: 0 14px;
+}
+
+/* Tablet */
+@media screen and (max-width: 900px) {
+  .topbar {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    padding: 12px 16px !important;
+  }
+
+  .language-select {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .language-select label {
+    font-size: .82rem;
+    white-space: nowrap;
+  }
+
+  #languageSelector {
+    max-width: 128px;
+    padding: 7px 9px;
+  }
+
+  .hero {
+    min-height: 82vh;
+    height: auto;
+    padding: 88px 18px 42px;
+    background-position: center center !important;
+  }
+
+  .hero img {
+    max-width: min(390px, 78vw);
+  }
+
+  .tagline {
+    font-size: clamp(1rem, 3.2vw, 1.35rem);
+    line-height: 1.45;
+    max-width: 620px;
+    margin-inline: auto;
+  }
+
+  .btn-link {
+    width: auto;
+    min-width: 180px;
+    max-width: 100%;
+  }
+
+  .content {
+    padding: 42px 14px;
+  }
+
+  .why-container,
+  .about-container {
+    padding: 34px 10px;
+    gap: 24px;
+  }
+
+  .content h2,
+  .about h2,
+  .textfitur {
+    font-size: clamp(1.55rem, 4vw, 2rem);
+  }
+
+  .content p,
+  .about p {
+    font-size: .98rem;
+    line-height: 1.75;
+  }
+
+  .why-right video,
+  .why-right img,
+  .about-img img {
+    max-width: min(360px, 88vw);
+  }
+
+  .features {
+    grid-template-columns: repeat(2, minmax(150px, 1fr)) !important;
+    gap: 14px;
+    max-width: 680px;
+  }
+
+  .feature-card {
+    padding: 18px 14px;
+    border-radius: 14px;
+  }
+
+  .feature-card .material-symbols-outlined {
+    font-size: 34px;
+    margin-bottom: 6px;
+  }
+
+  .feature-card h3,
+  .feature-card a {
+    font-size: .98rem;
+    line-height: 1.25;
+  }
+
+  .feature-card p {
+    font-size: .82rem;
+    line-height: 1.5;
+  }
+}
+
+/* HP / Smartphone */
+@media screen and (max-width: 600px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .topbar {
+    min-height: 58px;
+    padding: 9px 12px !important;
+  }
+
+  .language-select label {
+    display: none;
+  }
+
+  #languageSelector {
+    max-width: 112px;
+    font-size: .78rem;
+    padding: 6px 8px;
+  }
+
+  .burger {
+    display: block !important;
+    transform: scale(.86);
+  }
+
+  .nav-links {
+    top: 58px !important;
+    right: 12px !important;
+    left: auto !important;
+    width: min(230px, calc(100vw - 24px)) !important;
+    transform: none !important;
+    padding: 12px !important;
+    border-radius: 16px !important;
+    background: rgba(17,17,17,.96) !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.35);
+  }
+
+  .nav-links a {
+    width: 100%;
+    margin: 0 !important;
+    padding: 10px 12px;
+    text-align: center;
+    border-radius: 12px;
+    font-size: .9rem;
+  }
+
+  /* Ini inti: background slider dibuat contain supaya gambarnya mengecil dan tidak cuma kena tengahnya */
+  .hero {
+    min-height: 76vh;
+    height: auto;
+    padding: 76px 14px 34px;
+    background-size: contain !important;
+    background-position: center 82px !important;
+    background-color: #0d0d0d;
+  }
+
+  .hero .overlay {
+    background: rgba(0,0,0,.62);
+  }
+
+  .hero-content {
+    padding: 12px;
+    width: 100%;
+  }
+
+  .hero-content figure {
+    display: grid;
+    place-items: center;
+    gap: 8px;
+  }
+
+  .hero img {
+    max-width: min(260px, 72vw);
+  }
+
+  .tagline {
+    font-size: .96rem;
+    line-height: 1.45;
+    margin-top: .5rem;
+  }
+
+  .btn-link {
+    min-width: 160px;
+    padding: 10px 16px;
+    font-size: .86rem;
+    border-radius: 16px;
+    margin-top: 16px;
+  }
+
+  #scroll {
+    margin-bottom: 28px;
+  }
+
+  .textfitur {
+    margin: 24px 0 18px;
+  }
+
+  .content {
+    padding: 30px 10px;
+  }
+
+  .why-container,
+  .about-container {
+    padding: 24px 4px;
+    gap: 18px;
+  }
+
+  .content h2,
+  .about h2,
+  .textfitur,
+  .about-text h2 {
+    font-size: 1.45rem;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .content p,
+  .about p,
+  #aboutText {
+    font-size: .88rem;
+    line-height: 1.65;
+    text-align: center;
+  }
+
+  .why-right video,
+  .why-right img,
+  .about-img img {
+    max-width: min(240px, 72vw);
+    border-radius: 14px;
+  }
+
+  .features {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px;
+    padding: 0 4px;
+  }
+
+  .feature-card {
+    padding: 14px 9px;
+    border-radius: 13px;
+    min-height: 145px;
+  }
+
+  .feature-card .material-symbols-outlined {
+    font-size: 28px;
+    margin-bottom: 4px;
+  }
+
+  .feature-card h3,
+  .feature-card a {
+    font-size: .82rem;
+    line-height: 1.2;
+    margin: 6px 0 4px;
+  }
+
+  .feature-card p {
+    font-size: .72rem;
+    line-height: 1.38;
+  }
+
+  .about-container {
+    flex-direction: column;
+  }
+
+  .about-img img {
+    max-width: min(210px, 70vw);
+  }
+
+  .app-footer {
+    padding: 14px 10px;
+  }
+
+  .social-apps {
+    gap: 16px;
+  }
+
+  .icon-app {
+    width: 26px;
+    height: 26px;
+  }
+
+  .copyright {
+    font-size: 12px;
+  }
+
+  .loading-screen video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+/* HP sangat kecil */
+@media screen and (max-width: 380px) {
+  .hero {
+    min-height: 72vh;
+    background-size: 115% auto !important;
+    background-position: center 86px !important;
+  }
+
+  .hero img {
+    max-width: 220px;
+  }
+
+  .tagline {
+    font-size: .86rem;
+  }
+
+  .features {
+    gap: 8px;
+  }
+
+  .feature-card {
+    padding: 12px 7px;
+    min-height: 136px;
+  }
+
+  .feature-card .material-symbols-outlined {
+    font-size: 25px;
+  }
+
+  .feature-card h3,
+  .feature-card a {
+    font-size: .76rem;
+  }
+
+  .feature-card p {
+    font-size: .68rem;
+  }
+}
+
+/* =====================================================
+   FINAL HOMEPAGE MOBILE CLEAN FIX
+   - Hero slider tetap full/rapi (tidak jadi strip hitam)
+   - Why Choose dan About tetap berdampingan di HP tapi mengecil
+   - Feature cards compact di HP
+===================================================== */
+@media screen and (max-width: 600px) {
+  /* Hero dibuat cover lagi supaya tidak jadi gambar pipih di atas */
+  .hero {
+    min-height: 78svh !important;
+    height: auto !important;
+    padding: 78px 14px 34px !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-color: #0d0d0d !important;
+  }
+
+  .hero .overlay {
+    background: rgba(0, 0, 0, 0.58) !important;
+  }
+
+  .hero-content {
+    padding: 10px !important;
+    width: min(100%, 360px) !important;
+    margin-inline: auto !important;
+  }
+
+  .hero-content figure {
+    display: grid !important;
+    place-items: center !important;
+    gap: 8px !important;
+  }
+
+  .hero img {
+    max-width: min(230px, 66vw) !important;
+    width: 100% !important;
+  }
+
+  .tagline {
+    max-width: 310px !important;
+    margin: 8px auto 0 !important;
+    font-size: .94rem !important;
+    line-height: 1.42 !important;
+  }
+
+  .btn-link {
+    min-width: 150px !important;
+    padding: 10px 15px !important;
+    font-size: .84rem !important;
+    border-radius: 16px !important;
+  }
+
+  /* Section content dibuat lebih padat */
+  .content {
+    padding: 28px 10px !important;
+  }
+
+  /* Why Choose: teks dan gif/video tetap samping-sampingan di HP */
+  .why-container {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.25fr) minmax(96px, .75fr) !important;
+    gap: 10px !important;
+    align-items: center !important;
+    padding: 22px 2px !important;
+    text-align: left !important;
+  }
+
+  .why-left,
+  .why-right {
+    min-width: 0 !important;
+    flex: initial !important;
+    text-align: left !important;
+  }
+
+  .why-left h2,
+  #whyText {
+    font-size: 1.15rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 8px !important;
+    text-align: left !important;
+  }
+
+  .why-left p,
+  #contentText {
+    font-size: .72rem !important;
+    line-height: 1.48 !important;
+    text-align: left !important;
+  }
+
+  .why-right video,
+  .why-right img {
+    width: 100% !important;
+    max-width: 132px !important;
+    border-radius: 12px !important;
+    margin-inline: auto !important;
+    object-fit: contain !important;
+  }
+
+  /* Feature dibuat compact */
+  .textfitur {
+    margin: 18px 0 14px !important;
+    font-size: 1.35rem !important;
+  }
+
+  .features {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 9px !important;
+    padding: 0 2px !important;
+  }
+
+  .feature-card {
+    padding: 12px 8px !important;
+    border-radius: 12px !important;
+    min-height: 128px !important;
+  }
+
+  .feature-card .material-symbols-outlined {
+    font-size: 24px !important;
+    margin-bottom: 3px !important;
+  }
+
+  .feature-card h3,
+  .feature-card a {
+    font-size: .74rem !important;
+    line-height: 1.18 !important;
+    margin: 5px 0 3px !important;
+  }
+
+  .feature-card p {
+    font-size: .66rem !important;
+    line-height: 1.34 !important;
+  }
+
+  /* About juga tetap samping-sampingan di HP */
+  .about-container {
+    display: grid !important;
+    grid-template-columns: minmax(92px, .75fr) minmax(0, 1.25fr) !important;
+    gap: 10px !important;
+    align-items: center !important;
+    padding: 24px 2px !important;
+    text-align: left !important;
+  }
+
+  .about-img,
+  .about-text {
+    min-width: 0 !important;
+    flex: initial !important;
+    text-align: left !important;
+  }
+
+  .about-img img {
+    width: 100% !important;
+    max-width: 122px !important;
+    border-radius: 12px !important;
+    margin-inline: auto !important;
+    object-fit: contain !important;
+  }
+
+  .about-text h2,
+  #can {
+    font-size: 1.15rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 8px !important;
+    text-align: left !important;
+  }
+
+  #aboutText {
+    font-size: .72rem !important;
+    line-height: 1.48 !important;
+    text-align: left !important;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .hero {
+    min-height: 74svh !important;
+    padding-top: 72px !important;
+  }
+
+  .hero img {
+    max-width: min(205px, 62vw) !important;
+  }
+
+  .tagline {
+    font-size: .84rem !important;
+    max-width: 280px !important;
+  }
+
+  .why-container {
+    grid-template-columns: minmax(0, 1.35fr) minmax(82px, .65fr) !important;
+    gap: 8px !important;
+  }
+
+  .about-container {
+    grid-template-columns: minmax(80px, .65fr) minmax(0, 1.35fr) !important;
+    gap: 8px !important;
+  }
+
+  .why-right video,
+  .why-right img,
+  .about-img img {
+    max-width: 96px !important;
+  }
+
+  .why-left h2,
+  #whyText,
+  .about-text h2,
+  #can {
+    font-size: 1rem !important;
+  }
+
+  .why-left p,
+  #contentText,
+  #aboutText {
+    font-size: .66rem !important;
+    line-height: 1.42 !important;
+  }
+
+  .feature-card {
+    min-height: 118px !important;
+    padding: 10px 6px !important;
+  }
+
+  .feature-card .material-symbols-outlined {
+    font-size: 22px !important;
+  }
+
+  .feature-card h3,
+  .feature-card a {
+    font-size: .68rem !important;
+  }
+
+  .feature-card p {
+    font-size: .61rem !important;
+  }
+}
+
+/* =====================================================
+   FINAL FIX - FOOTER MENTOK BAWAH DI HOMEPAGE MOBILE
+   Kalau section setelah hero masih hidden, footer tetap didorong ke bawah.
+===================================================== */
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.hero {
+  flex: 1 0 auto;
+}
+
+.app-footer {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    min-height: 100svh;
+  }
+
+  /* Karena topbar fixed, hero dibuat mengisi sisa layar sebelum footer */
+  .hero {
+    min-height: calc(100svh - 96px) !important;
+    padding-top: 76px !important;
+    padding-bottom: 28px !important;
+  }
+
+  .app-footer {
+    margin-top: 0 !important;
+  }
+}
