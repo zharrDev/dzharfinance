@@ -241,22 +241,22 @@
 | **Auth** | Custom localStorage/sessionStorage (no Firebase Auth) |
 | **Deployment** | Static hosting (GitHub Pages, Netlify, Vercel, Firebase Hosting) |
 
-### 🔑 API Keys (Embedded — ⚠️ Rotate for Production!)
+### 🔑 API Keys (⚠️ Store Securely in Production!)
 ```js
 // js/weather.js
 const OPENWEATHER_API_KEY = 'YOUR_OPENWEATHER_API_KEY';
 
 // js/news.js
-const NEWS_API_KEY = 'pub_b9daeb2b5ad44ec3bc3d8366b23f1056';
+const NEWS_API_KEY = 'YOUR_NEWSDATA_API_KEY';
 
 // js/dashboard.js
 const FRANKFURTER_API = 'https://api.frankfurter.dev/v1/latest?from=IDR&to=USD';
 
 // Firebase Endpoint
-const FIREBASE_BASE = 'https://dzhar-schedule-api-default-rtdb.firebaseio.com/';
+const FIREBASE_BASE = 'YOUR_FIREBASE_PROJECT_URL';
 ```
 
-> ⚠️ **Security Note**: API keys and Firebase endpoints are exposed in client-side JS. For production, use Firebase Auth + Security Rules, and proxy external APIs through a backend.
+> ⚠️ **Security Note**: API keys and Firebase endpoints should be stored securely. For production, use Firebase Auth + Security Rules, and proxy external APIs through a backend. Never commit real API keys to version control.
 
 ---
 
@@ -390,7 +390,7 @@ git push origin main
 {
   "uid_abc123": {
     "email": "user@example.com",
-    "password": "plaintext123",   // ⚠️ No hashing!
+    "password": "HASHED_PASSWORD",   // ⚠️ Never store plain text!
     "nomorHP": "08123456789",
     "nomorDana": "08123456789",
     "createdAt": "2025-01-15T10:30:00.000Z"
@@ -846,7 +846,6 @@ SOFTWARE.
 |----------|------|
 | **GitHub** | [@yourusername](https://github.com/yourusername) |
 | **Instagram** | [@dzhar.hrahap](https://instagram.com/dzhar.hrahap) |
-| **WhatsApp** | [Chat](https://wa.me/628xxxxxxxxxx) |
 | **Facebook** | [Profile](https://facebook.com/yourprofile) |
 
 > Made with ❤️ by **ican** — *DzharFinance © 2025*
